@@ -1,0 +1,125 @@
+/* Independent presentation for the winter app. The desktop template does not load this file. */
+@media (max-width: 760px) {
+  body.nadal-redesign {
+    --app-bg: #0b1220;
+    --app-surface: #172338;
+    --app-text: #f5f8ff;
+    --app-muted: #c4d1e1;
+    background: var(--app-bg) !important;
+    color: var(--app-text) !important;
+  }
+  body.nadal-redesign .move-global-nav {
+    background: #0b1220 !important;
+    border-color: #293a51 !important;
+  }
+  body.nadal-redesign .move-global-nav-brand img {
+    filter: brightness(0) invert(1) !important;
+  }
+  body.nadal-redesign .masthead.nadal-poster {
+    background: radial-gradient(ellipse at 85% 0%,#315a83 0%,#17283f 40%,#121d30 100%) !important;
+    color: var(--app-text) !important;
+    border-radius: 0 0 30px 30px !important;
+    padding: 28px 20px !important;
+  }
+  @keyframes app-snowfall { from { background-position:0 0,24px 0; } to { background-position:0 220px,24px 300px; } }
+  body.nadal-native-app[data-app-screen='home'] .masthead.nadal-poster::after { content:''; position:absolute; inset:0; pointer-events:none; opacity:.23; background-image:radial-gradient(circle 2px at 30px 35px,#fff 98%,transparent),radial-gradient(circle 1px at 110px 90px,#fff 98%,transparent); background-size:160px 220px,220px 300px; animation:app-snowfall 25s linear infinite; }
+  html.winter-motion-off body.nadal-native-app .masthead.nadal-poster::after { animation:none!important; display:none!important; }
+  body.nadal-redesign .masthead.nadal-poster .nadal-cover-info h2 {
+    color: #fff !important;
+    font-family: 'Arial Narrow', Impact, sans-serif !important;
+    font-stretch: condensed;
+    font-size: clamp(38px,11vw,58px) !important;
+    line-height: 1.02 !important;
+  }
+  body.nadal-redesign .masthead.nadal-poster .nadal-cover-info p,
+  body.nadal-redesign .masthead.nadal-poster .nadal-cover-note { color: #d5e1f1 !important; }
+  body.nadal-redesign #home,
+  body.nadal-redesign #home .home-section { background: var(--app-bg) !important; color: var(--app-text) !important; border-color: #18263a !important; }
+  body.nadal-redesign #home .home-heading,
+  body.nadal-redesign #home .home-days-heading { color: var(--app-text) !important; }
+  body.nadal-redesign #home .home-text,
+  body.nadal-redesign #home .home-section p { color: var(--app-muted) !important; }
+  body.nadal-redesign #home .home-section { padding: 24px 20px !important; }
+  body.nadal-redesign #home .home-kicker { color: #9ec8f6 !important; }
+  body.nadal-redesign #home .home-day-card { box-shadow: 0 8px 24px #0005 !important; }
+  body.nadal-redesign > footer.footer { background: var(--app-bg) !important; }
+  body.nadal-redesign > footer.footer .footer-shell { background: var(--app-surface) !important; }
+  body.nadal-redesign footer.footer .winter-mobile-social,
+  body.nadal-redesign footer.footer .winter-mobile-social a { color: var(--app-text) !important; }
+  body.nadal-native-app { padding-bottom:calc(100px + env(safe-area-inset-bottom)) !important; }
+  body.nadal-native-app > .winter-mobile-dock { display:none!important; }
+  body.nadal-native-app .app-bottom-nav { position:fixed!important; z-index:100!important; width:auto!important; bottom:calc(12px + env(safe-area-inset-bottom)); left:12px; right:12px; display:grid; grid-template-columns:repeat(5,1fr); padding:6px; border:1px solid #35455c; border-radius:26px; background:#172338f5; box-shadow:0 10px 30px #0009; }
+  body.nadal-native-app .app-bottom-nav button { min-width:0; min-height:54px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:4px; border:0; border-radius:18px; background:transparent; color:#becde0; font:600 9px/1.1 system-ui; }
+  body.nadal-native-app .app-bottom-nav button.active { background:#344f71; color:#fff; }
+  body.nadal-native-app .app-bottom-nav svg,body.nadal-native-app .app-wheel-launch svg { width:21px; height:21px; }
+  body.nadal-native-app .app-wheel-launch { margin-top:14px; display:inline-flex; gap:8px; align-items:center; min-height:48px; padding:0 18px; border:1px solid #8eb2d5; border-radius:999px; color:#fff; background:#263d59; font-weight:700; }
+  body.nadal-native-app .app-help { width:44px; height:44px; border:0; border-radius:50%; background:#263d59; color:white; font-size:20px; font-weight:700; }
+  body.nadal-native-app .app-screen { padding:24px 18px 110px; color:#f5f8ff; background:#0b1220; min-height:100vh; }
+  body.nadal-native-app .app-screen[hidden] { display:none; }
+  body.nadal-native-app[data-app-screen='calendar'] :is(.day,.masthead,.home,.proposal-page,.winter-mobile-activities-page,.footer) { display:none!important; }
+  body.nadal-native-app[data-app-screen='map'] #projectCalendarMoveSchedule { display:none!important; }
+  body.nadal-native-app :is(.day,.day-body,.day .home-section,.proposal-page,.proposal-section,#winterMobileActivitiesPage,.winter-mobile-activities-head,.winter-mobile-results-section) { background:#0b1220!important; color:#f5f8ff!important; border-color:#26364a!important; }
+  body.nadal-native-app :is(.day .home-heading,.proposal-section .home-heading,.winter-mobile-activities-head h1,.winter-mobile-results-heading h2) { color:#fff!important; }
+  body.nadal-redesign.nadal-native-app .day .home-section>.home-heading { color:#fff!important; }
+  body.nadal-redesign.nadal-native-app .day .winter-activity-ticket.winter-ticket-pass>.feature { background:#172338!important; color:#fff!important; }
+  body.nadal-redesign.nadal-native-app .day .winter-activity-ticket.winter-ticket-pass .activity-ticket-title { color:#fff!important; }
+  body.nadal-redesign.nadal-native-app .day .winter-activity-ticket.winter-ticket-pass :is(.feature-copy,.feature-details,.feature-details p) { color:#d5e1f1!important; }
+  body.nadal-redesign.nadal-native-app .day .winter-activity-ticket.winter-ticket-pass .pass-facts>div { background:#263a54!important; }
+  body.nadal-redesign.nadal-native-app .day .winter-activity-ticket.winter-ticket-pass .pass-facts :is(dt,dd) { color:#fff!important; }
+  body.nadal-redesign.nadal-native-app .day .winter-activity-ticket.winter-ticket-pass>.bottom-panel { background:#172338!important; color:#fff!important; }
+  body.nadal-native-app :is(.day .home-section p,.proposal-intro,.winter-mobile-activities-head>p) { color:#c4d1e1!important; }
+  body.nadal-native-app #winterActivityDirectory { display:grid!important; grid-template-columns:1fr!important; gap:12px!important; }
+  body.nadal-native-app #winterActivityDirectory .winter-activity-directory-card { min-height:125px!important; border-radius:22px!important; overflow:hidden!important; }
+  body.nadal-redesign.nadal-native-app #winterMobileActivitiesPage:not([hidden]),
+  body.nadal-redesign.nadal-native-app #winterMobileActivitiesPage>.winter-mobile-activities-head,
+  body.nadal-redesign.nadal-native-app #winterMobileActivitiesPage>.winter-mobile-results-section { background:#0b1220!important; color:#f5f8ff!important; }
+  body.nadal-redesign.nadal-native-app #winterMobileActivitiesPage h1,
+  body.nadal-redesign.nadal-native-app #winterMobileActivitiesPage h2 { color:#f5f8ff!important; }
+  body.nadal-redesign.nadal-native-app #winterActivityDirectory .winter-activity-directory-card { background:var(--category-accent)!important; color:#fff!important; }
+  body.nadal-redesign.nadal-native-app #winterActivityDirectory .winter-activity-directory-copy { background:var(--category-accent)!important; color:#fff!important; }
+  body.nadal-redesign.nadal-native-app #winterActivityDirectory .winter-activity-directory-copy :is(strong,span) { color:#fff!important; }
+  body.nadal-redesign.nadal-native-app #winterActivityDirectory .winter-activity-directory-art { background-color:#fff!important; }
+  body.nadal-native-app #winterMobileActivityResults .winter-mobile-result-card .feature { background:#172338!important; color:#f5f8ff!important; }
+  body.nadal-native-app #winterMobileActivityResults .winter-mobile-result-card .activity-ticket-title { color:#fff!important; }
+  body.nadal-native-app #winterMobileActivityResults .winter-mobile-result-card .feature-kicker { color:#a9cbf2!important; }
+  body.nadal-native-app #winterMobileActivityResults .winter-mobile-result-card .pass-facts>div { background:#263a54!important; }
+  body.nadal-native-app #winterMobileActivityResults .winter-mobile-result-card .pass-facts :is(dt,dd) { color:#f5f8ff!important; }
+  body.nadal-native-app #winterMobileActivityResults .mobile-plan-details :is(summary,.feature-copy,.feature-details,.feature-details p) { color:#f5f8ff!important; }
+  body.nadal-native-app .app-calendar-results .calendar-list-row { display:block!important; margin:12px 0!important; padding:18px!important; border-radius:20px!important; background:#263d59!important; color:#fff!important; }
+  body.nadal-native-app .app-calendar-results .calendar-list-row :is(h3,p,span,b,time) { color:#fff!important; }
+  body.nadal-native-app #nadalProposalForm :is(input,textarea) { background:#172338!important; color:#fff!important; border:1px solid #405674!important; }
+  body.nadal-native-app #nadalProposalForm :is(input,textarea)::placeholder { color:#c4d1e1!important; }
+  body.nadal-native-app .app-screen-header span { color:#9bc9ff; font-size:11px; font-weight:800; letter-spacing:.12em; }
+  body.nadal-native-app .app-screen-header h1 { margin:8px 0; font:800 42px/1 'Arial Narrow',Impact,sans-serif; }
+  body.nadal-native-app .app-screen-header p { color:#c4d1e1; }
+  body.nadal-native-app .app-calendar-controls { display:flex; justify-content:space-between; align-items:center; margin-top:24px; }
+  body.nadal-native-app .app-calendar-controls h2 { text-transform:capitalize; font-size:20px; }
+  body.nadal-native-app .app-calendar-controls button { width:44px; height:44px; border:0; border-radius:50%; color:white; background:#263d59; font-size:25px; }
+  body.nadal-native-app .app-calendar-controls button:disabled { opacity:.35; }
+  body.nadal-native-app .app-weekdays,body.nadal-native-app .app-calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; text-align:center; }
+  body.nadal-native-app .app-weekdays { margin:16px 0 6px; color:#c4d1e1; font-size:11px; }
+  body.nadal-native-app .app-calendar-grid button { min-width:0; min-height:44px; border:0; border-radius:14px; background:#172338; color:white; }
+  body.nadal-native-app .app-calendar-grid button.has-plan { background:#9a354e; font-weight:800; }
+  body.nadal-native-app .app-calendar-grid button.has-pending { box-shadow:inset 0 -4px #d8ad47; }
+  body.nadal-native-app .app-calendar-grid button.selected { outline:2px solid #ffe063; outline-offset:-2px; }
+  body.nadal-native-app .app-calendar-results { margin:18px 0; color:#fff; }
+  body.nadal-native-app :is(.app-onboarding,.app-wheel) { width:calc(100% - 28px); max-width:480px; max-height:90dvh; padding:24px; border:1px solid #405674; border-radius:28px; color:#fff; background:#172338; box-shadow:0 25px 80px #000a; }
+  body.nadal-native-app :is(.app-onboarding,.app-wheel)::backdrop { background:#050912db; }
+  body.nadal-native-app .app-onboarding h2,body.nadal-native-app .app-wheel h2 { font:800 36px/1.05 'Arial Narrow',Impact,sans-serif; }
+  body.nadal-native-app .app-intro-icon { display:grid; place-items:center; width:88px; height:88px; margin:28px 0; border-radius:26px; background:#305579; color:#fff; }
+  body.nadal-native-app .app-intro-icon svg { width:42px; height:42px; }
+  body.nadal-native-app .app-intro-copy { color:#c4d1e1; line-height:1.5; }
+  body.nadal-native-app .app-skip { float:right; min-height:44px; background:transparent; color:#fff; border:0; }
+  body.nadal-native-app .app-intro-dots { display:flex; gap:7px; margin:28px 0; }
+  body.nadal-native-app .app-intro-dots i { width:8px; height:8px; border-radius:50%; background:#7589a0; }
+  body.nadal-native-app .app-intro-dots i.active { width:24px; border-radius:8px; background:#ffdc58; }
+  body.nadal-native-app :is(.app-intro-next,.app-spin,.app-result-link) { min-height:48px; width:100%; margin:6px 0; border:0; border-radius:999px; background:#ffdc58; color:#151d29; font-weight:800; }
+  body.nadal-native-app .app-dialog-head { display:flex; align-items:center; justify-content:space-between; }
+  body.nadal-native-app .app-close { width:44px; height:44px; border:0; border-radius:50%; background:#263d59; color:#fff; font-size:24px; }
+  body.nadal-native-app .app-wheel-pointer { margin:0 auto -12px; position:relative; z-index:1; width:0; height:0; border-left:11px solid transparent; border-right:11px solid transparent; border-top:19px solid #ffdc58; }
+  body.nadal-native-app .app-wheel-disc { position:relative; display:grid; place-items:center; width:min(70vw,280px); aspect-ratio:1; margin:auto; border:8px solid #e9c86a; border-radius:50%; background:conic-gradient(#9d354b 0 45deg,#286a60 45deg 90deg,#34558c 90deg 135deg,#a47a29 135deg 180deg,#9d354b 180deg 225deg,#286a60 225deg 270deg,#34558c 270deg 315deg,#a47a29 315deg); transition:transform 3s cubic-bezier(.15,.7,.2,1); }
+  body.nadal-native-app .app-wheel-icon { position:absolute; color:white; }
+  body.nadal-native-app .app-wheel-icon svg { width:18px; height:18px; }
+  body.nadal-native-app #winterActivitiesMapCanvas .leaflet-tile-pane { filter:brightness(.6) saturate(.7) hue-rotate(165deg); }
+  body.nadal-native-app .app-wheel-result { min-height:30px; text-align:center; font-weight:800; }
+}

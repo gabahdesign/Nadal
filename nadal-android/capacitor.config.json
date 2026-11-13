@@ -1,0 +1,6 @@
+{
+  "appId": "com.descobreix.move.nadal",
+  "appName": "Move Nadal",
+  "webDir": "www",
+  "server": { "androidScheme": "https" }
+}

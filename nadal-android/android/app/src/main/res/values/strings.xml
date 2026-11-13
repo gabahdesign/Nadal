@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Move Nadal</string>
+    <string name="title_activity_main">Move Nadal</string>
+    <string name="package_name">com.descobreix.move.nadal</string>
+    <string name="custom_url_scheme">com.descobreix.move.nadal</string>
+</resources>
