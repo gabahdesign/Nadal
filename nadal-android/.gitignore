@@ -1,0 +1,6 @@
+node_modules/
+www/
+temurin21.zip
+jdk-local/
+android/.gradle-local/
+android/.android-local/

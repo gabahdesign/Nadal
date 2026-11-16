@@ -24,6 +24,15 @@ allprojects {
     }
 }
 
+// Use the build tools installed alongside the project's Android 36 SDK.
+subprojects { project ->
+    ["com.android.application", "com.android.library"].each { pluginId ->
+        project.plugins.withId(pluginId) {
+            project.android.buildToolsVersion = "36.0.0"
+        }
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

@@ -1,0 +1,30 @@
+:root { color-scheme: dark; }
+html, body.nadal-native-app { background: #000; color: #fff; }
+@media (max-width: 760px) {
+  body.nadal-native-app { --app-bg: #000 !important; --app-surface: #121212 !important; --app-text: #fff !important; --app-muted: #d4d4d4 !important; background: #000 !important; }
+  body.nadal-native-app :is(.move-global-nav, .app-screen, #home, #home .home-section, footer.footer) { background: #000 !important; }
+  body.nadal-native-app :is(.masthead.nadal-poster, .app-bottom-nav, footer.footer .footer-shell) { background: #121212 !important; border-color: #2a2a2a !important; }
+  body.nadal-native-app :is(.day, .day-body, .day .home-section, .proposal-page, .proposal-section, #winterMobileActivitiesPage, .winter-mobile-activities-head, .winter-mobile-results-section, #winterMobileActivitiesPage > .winter-mobile-results-section) { background: #000 !important; color: #fff !important; border-color: #2a2a2a !important; }
+  body.nadal-native-app :is(.app-onboarding, .app-wheel, .app-calendar-grid button, #nadalProposalForm input, #nadalProposalForm textarea) { background: #1c1c1c !important; color: #fff !important; border-color: #454545 !important; }
+  body.nadal-native-app :is(.app-screen-header p, .day .home-section p, .proposal-intro, .winter-mobile-activities-head > p, .app-intro-copy) { color: #d4d4d4 !important; }
+}
+.nadal-intro { position: fixed !important; inset: 0 !important; z-index: 100000 !important; display: flex; flex-direction: column; overflow: hidden; padding: max(24px, env(safe-area-inset-top)) 24px max(26px, env(safe-area-inset-bottom)); background: #000 !important; color: #fff; font-family: Inter, system-ui, sans-serif; }
+.nadal-intro[hidden] { display: none; }
+.nadal-intro::before { content: ''; position: absolute; width: 110vw; height: 110vw; top: 5%; left: -40%; background: radial-gradient(circle, #224b69 0%, #122a26 30%, transparent 70%); opacity: .6; filter: blur(40px); pointer-events: none; }
+.nadal-intro-top, .nadal-intro-body, .nadal-intro-bottom { position: relative; z-index: 1; }
+.nadal-intro-top { display: flex; justify-content: space-between; align-items: center; }
+.nadal-intro-brand { font-weight: 900; letter-spacing: .13em; font-size: 13px; }
+.nadal-intro button { min-height: 48px; border: 0; cursor: pointer; font: inherit; }
+.nadal-intro-skip { color: #fff; background: #1c1c1c; border-radius: 30px; padding: 0 20px; }
+.nadal-intro-body { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: safe center; overflow-y: auto; overscroll-behavior: contain; }
+.nadal-intro-art { flex: 0 0 min(30vh, 260px); margin: 12px 0 24px; border-radius: 28px; background: #1c1c1c center / contain no-repeat; }
+.nadal-intro-kicker { color: #ffc83d; font-size: 12px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.nadal-intro h1 { color: #fff; font-family: Impact, 'Arial Narrow', sans-serif; font-weight: 900; font-size: clamp(42px, 11vw, 72px); line-height: .98; margin: 12px 0 16px; }
+.nadal-intro p { color: #e5e5e5; line-height: 1.5; font-size: 16px; margin: 0; max-width: 34rem; }
+.nadal-intro-bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.nadal-intro-dots { display: flex; gap: 8px; }
+.nadal-intro-dot { width: 8px; height: 8px; background: #777; border-radius: 9px; transition: width .2s; }
+.nadal-intro-dot.active { width: 25px; background: #ffc83d; }
+.nadal-intro-next { border-radius: 40px; padding: 0 25px; background: #ffc83d; color: #000; font-weight: 800 !important; }
+.nadal-intro button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .nadal-intro-dot { transition: none; } }

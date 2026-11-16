@@ -1,0 +1,37 @@
+@media (max-width:760px) {
+  body.nadal-redesign.nadal-native-app #app-calendar { display:none !important; }
+  body.nadal-redesign.nadal-native-app #app-calendar-v2 { display:none; }
+  body.nadal-redesign.nadal-native-app[data-app-screen="calendar"] #app-calendar-v2 { display:block; min-height:100vh; padding:24px 16px calc(120px + env(safe-area-inset-bottom)); background:#000; color:#fff; }
+  body.nadal-native-app .app-calendar-v2-header h1, body.nadal-native-app #app-calendar-v2 h2 { margin:0 0 12px; color:#fff; font:400 32px/1.05 Impact,'Arial Narrow',sans-serif; letter-spacing:0; }
+  body.nadal-native-app .app-calendar-v2-header h1 { font-size:clamp(38px,10vw,52px); }
+  body.nadal-native-app #app-calendar-v2 .app-calendar-kicker { color:#ffc83d; font:800 11px/1.4 system-ui,sans-serif; letter-spacing:.08em; }
+  body.nadal-native-app #app-calendar-v2 .app-calendar-copy { color:#e3e3e3; font:14px/1.5 system-ui,sans-serif; }
+  body.nadal-native-app .app-calendar-v2-months { display:flex; gap:8px; overflow-x:auto; margin:20px -16px; padding:0 16px 6px; }
+  body.nadal-native-app :is(.app-calendar-v2-months,.app-calendar-v2-tabs) button { min-height:48px; flex:0 0 auto; padding:0 15px; border:1px solid #555; border-radius:999px; background:#1c1c1c; color:#fff; font:700 13px system-ui,sans-serif; }
+  body.nadal-native-app :is(.app-calendar-v2-months,.app-calendar-v2-tabs) button.is-selected { background:#ffc83d; border-color:#ffc83d; color:#000; }
+  body.nadal-native-app .app-calendar-v2-panel, body.nadal-native-app .app-calendar-v2-results, body.nadal-native-app .app-calendar-v2-pending { margin:14px 0; padding:18px; border:1px solid #303030; border-radius:22px; background:#121212; }
+  body.nadal-native-app .app-calendar-v2-scroll { margin:0 -6px; overflow-x:auto; }
+  body.nadal-native-app .app-calendar-v2-grid { display:grid; grid-template-columns:repeat(7,minmax(48px,1fr)); min-width:336px; gap:0; }
+  body.nadal-native-app .app-calendar-v2-weekday { display:grid; place-items:center; min-height:32px; color:#d4d4d4; font:700 12px system-ui,sans-serif; }
+  body.nadal-native-app .app-calendar-v2-day { position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:48px; min-height:48px; border:2px solid transparent; border-radius:50%; background:transparent; color:#fff; font:700 14px system-ui,sans-serif; }
+  body.nadal-native-app .app-calendar-v2-day.has-pending { border-color:#ffc83d; }
+  body.nadal-native-app .app-calendar-v2-day.has-confirmed { background:#2ee59d; color:#000; }
+  body.nadal-native-app .app-calendar-v2-day.has-confirmed.has-pending { border-color:#ffc83d; }
+  body.nadal-native-app .app-calendar-v2-day.is-selected { outline:2px solid #fff; outline-offset:-5px; }
+  body.nadal-native-app .app-calendar-v2-dots { display:flex; gap:3px; height:4px; position:absolute; bottom:5px; }
+  body.nadal-native-app .app-calendar-v2-dots i { width:4px; height:4px; border-radius:50%; background:#ffc83d; }
+  body.nadal-native-app .app-calendar-v2-dots i.confirmed { background:#000; }
+  body.nadal-native-app .app-calendar-v2-legend { display:flex; flex-wrap:wrap; gap:12px; margin-top:15px; color:#e5e5e5; font:12px/1.4 system-ui,sans-serif; }
+  body.nadal-native-app .app-calendar-v2-legend span { display:flex; align-items:center; gap:6px; }
+  body.nadal-native-app .app-calendar-v2-legend i { width:12px; height:12px; border-radius:50%; }
+  body.nadal-native-app .app-calendar-v2-legend i.confirmed { background:#2ee59d; }
+  body.nadal-native-app .app-calendar-v2-legend i.pending { border:2px solid #ffc83d; }
+  body.nadal-native-app .app-calendar-v2-tabs { display:flex; gap:8px; margin:16px 0; }
+  body.nadal-native-app .app-calendar-v2-cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+  body.nadal-native-app .app-calendar-v2-cards > .app-calendar-copy { grid-column:1/-1; }
+  body.nadal-native-app #app-calendar-v2 button:focus-visible { outline:3px solid #fff; outline-offset:2px; }
+}
+@media (max-width:400px) {
+  body.nadal-native-app .app-calendar-v2-panel { padding-left:4px; padding-right:4px; }
+  body.nadal-native-app .app-calendar-v2-panel h2, body.nadal-native-app .app-calendar-v2-legend { margin-left:12px; margin-right:12px; }
+}

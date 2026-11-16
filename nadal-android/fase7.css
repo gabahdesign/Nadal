@@ -1,0 +1,53 @@
+@media (max-width:760px) {
+  html:has(body.nadal-native-app), body.nadal-native-app, body.nadal-native-app * { scrollbar-width:none; }
+  html:has(body.nadal-native-app)::-webkit-scrollbar, body.nadal-native-app::-webkit-scrollbar, body.nadal-native-app *::-webkit-scrollbar { display:none; width:0; height:0; }
+  body.nadal-native-app :is(.app-map-filters,.app-category-months,.app-calendar-v2-months,.app-calendar-v2-scroll) { cursor:grab; touch-action:pan-x; }
+  body.nadal-native-app .app-scroll-dragging { cursor:grabbing !important; user-select:none; }
+  body.nadal-redesign.nadal-native-app .app-map-screen { display:none; }
+  body.nadal-redesign.nadal-native-app[data-app-screen="map"] :is(.day,.masthead,.home,.proposal-page,.winter-mobile-activities-page,footer.footer,#app-calendar,#app-calendar-v2) { display:none!important; }
+  body.nadal-redesign.nadal-native-app[data-app-screen="map"] #winterMobileActivitiesPage { display:none!important; }
+  body.nadal-redesign.nadal-native-app[data-app-screen="map"] .app-map-screen { display:block; padding:20px 16px calc(120px + env(safe-area-inset-bottom)); min-height:100vh; background:#000; color:#fff; }
+  body.nadal-native-app .app-map-title { margin:0 0 10px; color:#fff; font:400 46px/1 Impact,'Arial Narrow',sans-serif; letter-spacing:0; }
+  body.nadal-native-app .app-map-copy { color:#e5e5e5; font:14px/1.5 system-ui,sans-serif; }
+  body.nadal-native-app .app-map-count { display:inline-flex; margin:5px 0 15px; padding:10px 14px; border-radius:999px; background:#1c1c1c; color:#fff; font:700 12px system-ui,sans-serif; }
+  body.nadal-native-app .app-map-precision { margin:0 0 14px; color:#d4d4d4; font:12px/1.4 system-ui,sans-serif; }
+  body.nadal-native-app .app-map-filters { display:flex; gap:8px; overflow-x:auto; margin:0 -16px 16px; padding:0 16px 5px; }
+  body.nadal-native-app .app-map-filters button { display:flex; gap:7px; align-items:center; flex:0 0 auto; min-height:48px; padding:0 14px; border:1px solid #555; border-radius:999px; color:#fff; background:#1c1c1c; font:700 12px system-ui,sans-serif; }
+  body.nadal-native-app .app-map-filters button.selected { border-color:#ffc83d; background:#332913; }
+  body.nadal-native-app .app-map-filters i { width:12px; height:12px; border-radius:50%; box-shadow:0 0 0 1px #fff; }
+  body.nadal-native-app .app-map-frame { position:relative; height:min(65vh,610px); min-height:410px; overflow:hidden; border:1px solid #444; border-radius:22px; background:#1c1c1c; }
+  body.nadal-native-app .app-map-canvas { width:100%; height:100%; background:#1c1c1c; }
+  body.nadal-native-app .app-map-canvas .leaflet-tile-pane { filter:invert(1) hue-rotate(180deg) brightness(.8) contrast(.9); }
+  body.nadal-native-app .app-map-canvas .leaflet-control-attribution { color:#fff; background:#121212e8; font:11px/1.3 system-ui,sans-serif; }
+  body.nadal-native-app .app-map-canvas .leaflet-control-attribution a { color:#fff; }
+  body.nadal-native-app .app-map-canvas .leaflet-control-zoom a { display:grid; place-items:center; width:48px; height:48px; background:#121212; border-color:#666; color:#fff; }
+  body.nadal-native-app .app-map-center { position:absolute; top:10px; left:10px; z-index:500; min-height:48px; padding:0 14px; border:1px solid #666; border-radius:999px; background:#121212; color:#fff; font:700 12px system-ui,sans-serif; }
+  body.nadal-native-app .app-map-status { position:absolute; top:66px; left:10px; right:10px; z-index:500; padding:12px; border-radius:12px; background:#121212; color:#fff; font:13px/1.4 system-ui,sans-serif; }
+  body.nadal-native-app .app-map-status[hidden], body.nadal-native-app .app-map-sheet[hidden] { display:none; }
+  body.nadal-native-app .app-map-pin-container, body.nadal-native-app .app-map-cluster-container { display:grid; place-items:center; background:transparent; border:0; }
+  body.nadal-native-app .app-map-pin { display:block; width:20px; height:20px; border:3px solid #fff; border-radius:50%; background:var(--pin-color); box-shadow:0 2px 9px #000; }
+  body.nadal-native-app .app-map-cluster { display:grid; place-items:center; width:42px; height:42px; border:3px solid #ffc83d; border-radius:50%; background:#121212; color:#fff; font:800 14px system-ui,sans-serif; box-shadow:0 3px 12px #000; }
+  body.nadal-native-app .app-map-sheet { position:absolute; z-index:600; left:8px; right:8px; bottom:22px; max-height:48%; overflow:auto; border:1px solid #555; border-radius:20px; background:#121212; box-shadow:0 8px 28px #000c; color:#fff; }
+  body.nadal-native-app .app-map-sheet.expanded { max-height:82%; }
+  body.nadal-native-app .app-map-sheet-handle { display:block; width:100%; height:48px; margin:0; border:0; background:transparent; touch-action:pan-y; }
+  body.nadal-native-app .app-map-sheet-handle::after { content:''; display:block; width:42px; height:5px; margin:auto; border-radius:8px; background:#aaa; }
+  body.nadal-native-app .app-map-sheet-content { position:relative; padding:0 15px 16px; }
+  body.nadal-native-app .app-map-sheet h2 { margin:8px 45px 10px 0; color:#fff; font:800 18px/1.15 system-ui,sans-serif; }
+  body.nadal-native-app .app-map-sheet-category { display:inline-block; margin:0; padding-left:8px; border-left:5px solid; color:#fff; font:700 11px system-ui,sans-serif; }
+  body.nadal-native-app .app-map-sheet .app-plan-compact { flex-direction:row; width:100%; min-height:85px; margin:10px 0; border-top:0; border-left:4px solid var(--category-color); }
+  body.nadal-native-app .app-map-sheet .app-plan-compact > img { width:82px; height:auto; min-height:85px; }
+  body.nadal-native-app .app-map-sheet .app-plan-copy { padding:8px; gap:3px; }
+  body.nadal-native-app .app-map-sheet .app-plan-title { font-size:14px; }
+  body.nadal-native-app .app-map-close { position:absolute; top:0; right:0; width:48px; height:48px; border:0; border-radius:50%; background:#303030; color:#fff; font-size:24px; }
+  body.nadal-native-app .app-map-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; }
+  body.nadal-native-app .app-map-facts > span { display:flex; flex-direction:column; gap:5px; min-width:0; padding:8px; border-radius:10px; background:#262626; color:#fff; font:11px/1.3 system-ui,sans-serif; overflow-wrap:anywhere; }
+  body.nadal-native-app .app-map-sheet-precision { margin:10px 0; color:#d4d4d4; font:12px/1.4 system-ui,sans-serif; }
+  body.nadal-native-app .app-map-details { width:100%; min-height:48px; margin-top:12px; border:0; border-radius:999px; background:#ffc83d; color:#000; font:800 13px system-ui,sans-serif; }
+  body.nadal-native-app .app-map-directory { margin-top:16px; border:1px solid #3a3a3a; border-radius:18px; background:#121212; }
+  body.nadal-native-app .app-map-directory summary { min-height:48px; padding:16px; color:#fff; cursor:pointer; font:700 14px/1.3 system-ui,sans-serif; }
+  body.nadal-native-app .app-map-directory-content { padding:0 12px 12px; }
+  body.nadal-native-app .app-map-directory-row { display:flex; align-items:center; gap:8px; padding:5px 0; border-top:1px solid #333; }
+  body.nadal-native-app .app-map-directory-row button { flex:1; min-height:48px; border:0; text-align:left; color:#fff; background:transparent; font:600 13px/1.3 system-ui,sans-serif; }
+  body.nadal-native-app .app-map-directory-row a { display:flex; align-items:center; min-height:48px; color:#fff; font:600 12px system-ui,sans-serif; }
+  body.nadal-native-app .app-map-screen :is(button,a,summary):focus-visible { outline:3px solid #fff; outline-offset:2px; }
+}
