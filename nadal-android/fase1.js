@@ -35,6 +35,7 @@
   const finish = () => {
     try { localStorage.setItem('nadalIntroVista', '1'); } catch (_) {}
     overlay.remove();
+    document.dispatchEvent(new Event('nadal-intro-finished'));
     if (returnFocus && returnFocus.isConnected) returnFocus.focus();
   };
   overlay.querySelector('.nadal-intro-skip').addEventListener('click', finish);
@@ -48,7 +49,7 @@
     if (!(event.target instanceof Element) || !event.target.closest('.app-help')) return;
     event.preventDefault();
     event.stopImmediatePropagation();
-    open();
+    document.dispatchEvent(new Event('nadal-tutorial-replay'));
   }, true);
   // A preview URL can display the introduction again without clearing preferences.
   if (!seen || new URLSearchParams(location.search).get('intro') === '1') open();

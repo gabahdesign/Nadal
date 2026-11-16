@@ -1,0 +1,12 @@
+@media(max-width:760px){
+ body.nadal-redesign.nadal-native-app .app-tour {position:fixed!important;inset:0;z-index:2147483000!important;pointer-events:none;}
+ .app-tour-shade {position:fixed;background:rgba(0,0,0,.82);pointer-events:auto;}
+ .app-tour-ring {position:fixed;box-sizing:border-box;border:3px solid #ffc83d;border-radius:14px;box-shadow:0 0 0 2px #000,0 0 24px #ffc83d88;pointer-events:none;}
+ .app-tour-card {position:fixed;left:16px;right:16px;box-sizing:border-box;padding:16px 18px;border:1px solid #6d5a29;border-radius:20px;background:#1c1c1c;color:#fff;box-shadow:0 12px 30px #000a;pointer-events:auto;}
+ .app-tour-top {display:flex;align-items:center;justify-content:space-between;color:#ffdb78;font:800 13px/1 system-ui,sans-serif;}
+ .app-tour-top button {min-width:64px;min-height:44px;padding:8px 12px;border:0;border-radius:999px;background:#333;color:#fff;font:700 14px system-ui,sans-serif;}
+ .app-tour-card p {margin:8px 0 0;color:#fff;font:600 16px/1.45 system-ui,sans-serif;}
+ .app-tour-finish {min-height:48px;margin-top:16px;padding:12px 24px;border:0;border-radius:999px;background:#ffc83d;color:#17120a;font:800 15px system-ui,sans-serif;}
+ .app-tour [hidden] {display:none!important;}
+ .app-tour button:focus-visible {outline:3px solid #fff;outline-offset:3px;}
+}
