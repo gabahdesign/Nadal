@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import './fase9-data.js';
+const f=globalThis.NadalWheelDates.eligible;
+const now=new Date(2026,11,7,18,0);
+assert.equal(f({trobadaMove:{data:'2026-12-06',hora:'09:30'}},now),false);
+assert.equal(f({trobadaMove:{data:'2026-12-07',hora:'17:30'}},now),false);
+assert.equal(f({trobadaMove:{data:'2026-12-08',hora:'09:30'}},now),true);
+assert.equal(f({dataInici:'2026-12-05',dataFi:'2026-12-08'},now),true);
+assert.equal(f({dataInici:'2026-11-01',dataFi:'2026-12-06'},now),false);
+assert.equal(f({dataInici:null,dataFi:null,periode:'Pendent de confirmar'},now),false);
+assert.equal(f({dataInici:'2026-12-01',dataFi:null},now),false);
+assert.equal(f({trobadaMove:{data:'2026-12-07',hora:'17:00–01:00'}},now),true);
+assert.equal(f({trobadaMove:{data:'2026-12-06',hora:'17:00–01:00'}},new Date(2026,11,7,0,30)),true);
+assert.equal(f({trobadaMove:{data:'2026-12-06',hora:'17:00–01:00'}},new Date(2026,11,7,2,0)),false);
+console.log('10 casos de dates validats');
