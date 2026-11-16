@@ -1,0 +1,23 @@
+@media(max-width:760px){
+ body.nadal-redesign.nadal-native-app #winterSettings {box-sizing:border-box;position:fixed;inset:0;width:100%;max-width:none;height:100dvh;max-height:none;margin:0;padding:calc(20px + env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left));overflow-y:auto;border:0;border-radius:0;background:#000;color:#fff;}
+ body.nadal-redesign.nadal-native-app #winterSettings::backdrop {background:#000c;}
+ body.nadal-redesign.nadal-native-app #winterSettings .winter-settings-head h2 {margin:0;color:#fff;font:800 34px/1.1 system-ui,sans-serif;letter-spacing:-.04em;}
+ body.nadal-redesign.nadal-native-app #winterSettings .winter-settings-close {width:48px;height:48px;background:#242424;color:#fff;font-size:26px;}
+ body.nadal-redesign.nadal-native-app #winterSettings .winter-motion-setting {padding:20px 0;border-color:#353535;}
+ body.nadal-redesign.nadal-native-app #winterSettings .winter-motion-copy strong {color:#fff;font:700 16px/1.3 system-ui,sans-serif;}
+ body.nadal-redesign.nadal-native-app #winterSettings .winter-motion-copy small {color:#e2e2e2;font:14px/1.45 system-ui,sans-serif;}
+ body.nadal-redesign.nadal-native-app #winterSettings .winter-motion-switch {width:56px;height:48px;background:transparent;}
+ body.nadal-redesign.nadal-native-app #winterSettings .winter-motion-switch::after {content:'';position:absolute;top:9px;left:2px;right:2px;height:30px;background:#555;border-radius:999px;}
+ body.nadal-redesign.nadal-native-app #winterSettings .winter-motion-switch[aria-checked="true"]::after {background:#ffc83d;}
+ body.nadal-redesign.nadal-native-app #winterSettings .winter-motion-switch::before {z-index:1;top:13px;left:6px;}
+ body.nadal-redesign.nadal-native-app #winterSettings .winter-mobile-settings-links {gap:10px;margin-top:8px;}
+ body.nadal-redesign.nadal-native-app #winterSettings .winter-mobile-settings-links a,body.nadal-redesign.nadal-native-app #winterSettings .app-settings-action,body.nadal-redesign.nadal-native-app #winterSettings .app-settings-rules summary {box-sizing:border-box;display:flex;align-items:center;width:100%;min-height:54px;padding:15px 16px;border:0;border-radius:16px;background:#1c1c1c;color:#fff;font:700 15px/1.3 system-ui,sans-serif;text-align:left;text-decoration:none;}
+ body.nadal-redesign.nadal-native-app #winterSettings .app-settings-action,body.nadal-redesign.nadal-native-app #winterSettings .app-settings-rules {margin-top:10px;}
+ body.nadal-redesign.nadal-native-app #winterSettings .app-settings-rules summary {cursor:pointer;list-style:none;}
+ body.nadal-redesign.nadal-native-app #winterSettings .app-settings-rules summary::after {content:'+';margin-left:auto;color:#ffc83d;font-size:22px;}
+ body.nadal-redesign.nadal-native-app #winterSettings .app-settings-rules[open] summary::after {content:'−';}
+ body.nadal-redesign.nadal-native-app #winterSettings .app-settings-rules-body {padding:10px 16px 18px;color:#eee;}
+ body.nadal-redesign.nadal-native-app #winterSettings .app-settings-rules-body h3 {margin:16px 0 8px;color:#ffc83d;font:700 17px/1.3 system-ui,sans-serif;}
+ body.nadal-redesign.nadal-native-app #winterSettings .app-settings-rules-body p {color:#eee!important;font:15px/1.55 system-ui,sans-serif;}
+ body.nadal-redesign.nadal-native-app #winterSettings :is(button,a,summary):focus-visible {outline:3px solid #ffc83d;outline-offset:3px;}
+}
