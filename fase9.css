@@ -1,0 +1,42 @@
+@media(max-width:760px){
+ body.nadal-native-app .app-wheel-v2 { width:min(440px,calc(100% - 24px)); max-height:calc(100dvh - 32px); padding:20px; border:1px solid #3d3d3d; border-radius:26px; background:#121212; color:#fff; box-shadow:0 18px 60px #000b; }
+ body.nadal-native-app .app-wheel-v2::backdrop {background:#000c;}
+ body.nadal-native-app .app-wheel-v2-head {display:flex;align-items:center;justify-content:space-between;gap:12px;}
+ body.nadal-native-app .app-wheel-v2-head h2 {margin:0;font:800 30px/1.1 system-ui,sans-serif;color:#fff;}
+ body.nadal-native-app .app-wheel-v2-close {width:48px;height:48px;border:0;border-radius:50%;background:#292929;color:#fff;font-size:26px;}
+ body.nadal-native-app .app-wheel-v2-intro,.app-wheel-v2-message {color:#e3e3e3;font:14px/1.45 system-ui,sans-serif;}
+ body.nadal-native-app .app-wheel-v2-stage {position:relative;margin:20px auto 14px;width:280px;max-width:100%;}
+ body.nadal-native-app .app-wheel-v2-pointer {position:absolute;z-index:2;top:-9px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:21px solid #ffc83d;}
+ body.nadal-native-app .app-wheel-v2-disc {display:grid;place-items:center;position:relative;width:280px;max-width:100%;aspect-ratio:1;border:7px solid #ffc83d;border-radius:50%;}
+ body.nadal-native-app .app-wheel-v2-number {display:flex;flex-direction:column;align-items:center;gap:1px;position:absolute;font:800 11px/1 system-ui,sans-serif;color:#fff;text-shadow:0 1px 3px #000,0 0 4px #000;}
+ body.nadal-native-app .app-wheel-v2-number svg {width:15px;height:15px;}
+ body.nadal-native-app .app-wheel-v2-legend {display:grid;grid-template-columns:1fr 1fr;gap:7px 10px;list-style:none;margin:14px 0;padding:0;color:#f4f4f4;font:12px/1.3 system-ui,sans-serif;}
+ body.nadal-native-app .app-wheel-v2-legend li {display:flex;align-items:flex-start;gap:6px;min-width:0;overflow-wrap:anywhere;}
+ body.nadal-native-app .app-wheel-v2-legend li span {display:grid;place-items:center;flex:none;width:21px;height:21px;border-radius:50%;font-weight:800;color:#fff;text-shadow:0 1px 3px #000,0 0 4px #000;}
+ body.nadal-native-app .app-wheel-v2 :is(.app-wheel-v2-spin,.app-wheel-v2-view) {width:100%;min-height:50px;margin-top:10px;border:0;border-radius:999px;font:800 15px system-ui,sans-serif;}
+ body.nadal-native-app .app-wheel-v2-spin {background:#ffc83d;color:#17120a;}
+ body.nadal-native-app .app-wheel-v2-view {background:#303030;color:#fff;}
+ body.nadal-native-app .app-wheel-v2 :is(button:focus-visible) {outline:3px solid #fff;outline-offset:3px;}
+ body.nadal-native-app .app-wheel-v2 :is([hidden]) {display:none!important;}
+ body.nadal-native-app .app-wheel-v2-result .app-plan-compact {width:100%;margin:12px 0;text-align:left;}
+}
+@media(max-width:760px){
+ body.nadal-native-app .app-wheel-v2 { box-sizing:border-box; position:fixed; inset:0; margin:0; width:100%; max-width:none; height:100dvh; max-height:none; overflow-y:auto; padding:calc(18px + env(safe-area-inset-top)) 20px calc(24px + env(safe-area-inset-bottom)); border:0; border-radius:0; background:#101010; }
+ body.nadal-native-app .app-wheel-v2-settings {margin:16px 0; border-radius:16px; background:#242424;}
+ body.nadal-native-app .app-wheel-v2-settings-toggle {display:flex; align-items:center; gap:10px; min-height:52px; padding:0 16px; color:#fff; font:700 14px/1.3 system-ui,sans-serif; cursor:pointer; list-style:none;}
+ body.nadal-native-app .app-wheel-v2-settings-toggle::-webkit-details-marker {display:none;}
+ body.nadal-native-app .app-wheel-v2-settings-toggle::after {content:'+';margin-left:auto;color:#ffc83d;font-size:24px;}
+ body.nadal-native-app .app-wheel-v2-settings[open] .app-wheel-v2-settings-toggle::after {content:'−';}
+ body.nadal-native-app .app-wheel-v2-settings-toggle[aria-disabled="true"] {opacity:.5;cursor:wait;}
+ body.nadal-native-app .app-wheel-v2-settings-toggle svg {width:22px;height:22px;color:#ffc83d;}
+ body.nadal-native-app .app-wheel-v2-settings-body {padding:0 16px 16px;}
+ body.nadal-native-app .app-wheel-v2-settings-body p {color:#e3e3e3;font:14px/1.4 system-ui,sans-serif;}
+ body.nadal-native-app .app-wheel-v2-category-list {display:grid;gap:2px;}
+ body.nadal-native-app .app-wheel-v2-category {display:flex;align-items:center;gap:12px;min-height:48px;color:#fff;font:600 14px/1.3 system-ui,sans-serif;}
+ body.nadal-native-app .app-wheel-v2-category input {width:22px;height:22px;accent-color:#ffc83d;}
+ body.nadal-native-app[data-app-screen="home"] .app-home-wheel-card {position:relative;min-height:180px;overflow:hidden;padding:24px;border:0;background:radial-gradient(circle at 85% 35%,#785823,#2a2115 54%,#181613 100%);}
+ body.nadal-native-app .app-home-wheel-card h2 {position:relative;z-index:1;max-width:52%;font:800 30px/1.04 system-ui,sans-serif;letter-spacing:-.04em;}
+ body.nadal-native-app .app-home-wheel-card .app-wheel-launch {position:relative;z-index:1;min-height:52px;padding:0 19px;border-radius:999px;box-shadow:0 6px 18px #0006;}
+ body.nadal-native-app .app-home-wheel-card::before {content:'';position:absolute;right:19px;top:25px;width:125px;aspect-ratio:1;border:6px solid #ffc83d;border-radius:50%;background:radial-gradient(circle,#ffc83d 0 8px,transparent 9px),conic-gradient(#b8384f 0 45deg,#e6ad36 45deg 90deg,#4058a5 90deg 135deg,#a82f43 135deg 180deg,#e6ad36 180deg 225deg,#4058a5 225deg 270deg,#b8384f 270deg 315deg,#e6ad36 315deg);box-shadow:0 8px 24px #0009;transform:rotate(-12deg);}
+ body.nadal-native-app .app-home-wheel-card::after {content:'';position:absolute;right:71px;top:18px;border-left:10px solid transparent;border-right:10px solid transparent;border-top:19px solid #fff0ba;}
+}

@@ -1,0 +1,21 @@
+import { mkdir, readFile, writeFile, cp } from 'node:fs/promises';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=dirname(fileURLToPath(import.meta.url));
+const output=resolve(root,'pages-build');
+await mkdir(output,{recursive:true});
+const desktop=await readFile(resolve(root,'../index.html'),'utf8');
+const redirect=`<script>if(window.matchMedia('(max-width: 760px)').matches){var moveApp=new URL('nadal-mobile.html',location.href);moveApp.search=location.search;if(!moveApp.searchParams.has('project'))moveApp.searchParams.set('project','nadal');if(!moveApp.searchParams.has('lang'))moveApp.searchParams.set('lang','ca');location.replace(moveApp.href);}</script>`;
+if(!desktop.includes('<head>'))throw new Error('No s’ha trobat la capçalera del web.');
+await writeFile(resolve(output,'index.html'),desktop.replace('<head>','<head>'+redirect));
+let mobile=await readFile(resolve(root,'www/index.html'),'utf8');
+mobile=mobile.replace('src="nadal-app.js?v=map-navigation-2"','src="nadal-mobile-runtime.js?v=map-navigation-2"');
+mobile=mobile.replace("var moveBasePath = window.location.pathname.replace(/\\/plantilla-evento\\.html\\/?$/, '').replace(/\\/$/, '') || '/move';", "var moveBasePath = 'https://descobreix.com/move';");
+mobile=mobile.replace("var isLocalPreview = /^(localhost|127\\.0\\.0\\.1)$/.test(window.location.hostname);", "var isLocalPreview = /^(localhost|127\\.0\\.0\\.1)$/.test(window.location.hostname) || /(^|\\.)github\\.io$/.test(window.location.hostname);");
+mobile=mobile.replace('</head>','<link rel="icon" href="./nadal-icon.png"><link rel="apple-touch-icon" href="./nadal-icon.png"></head>');
+await writeFile(resolve(output,'nadal-mobile.html'),mobile);
+for(const name of ['fase1.css','fase1.js','fase2.css','fase3.css','fase3.js','fase4.css','fase4.js','fase5.css','fase5.js','fase6.css','fase6.js','fase7.css','fase7.js','fase8.css','fase8.js','fase9.css','fase9.js','fase9-data.js','fase10.css','fase10.js','fase11.css','fase11.js','activitats.json','proposal-config.json','nadal-app.css','move-logo.png','images']) await cp(resolve(root,'www',name),resolve(output,name),{recursive:true});
+await cp(resolve(root,'www/nadal-app.js'),resolve(output,'nadal-mobile-runtime.js'));
+await cp(resolve(root,'android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png'),resolve(output,'nadal-icon.png'));
+for(const name of ['leaflet/leaflet.js','leaflet/leaflet.css','leaflet/images','markercluster/leaflet.markercluster.js','markercluster/MarkerCluster.css']) {const dest=resolve(output,'vendor',name);await mkdir(dirname(dest),{recursive:true});await cp(resolve(root,'www/vendor',name),dest,{recursive:true});}
+console.log('Previsualització de GitHub Pages preparada a pages-build.');

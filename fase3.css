@@ -1,0 +1,63 @@
+/* Home screen for the Android bundle; desktop assets remain unchanged. */
+@media (max-width: 760px) {
+  body.nadal-native-app[data-app-screen="home"] .masthead.nadal-poster {
+    display: flex !important; flex-direction: column !important; gap: 0 !important;
+    margin: 0 12px 16px !important; padding: 22px 20px 24px !important;
+    border: 1px solid #2a2a2a !important; border-radius: 28px !important;
+    background: radial-gradient(ellipse at 90% 0%, #29322d 0%, #171d1b 38%, #121212 78%) !important;
+    box-shadow: 0 16px 40px #0008 !important;
+  }
+  body.nadal-native-app[data-app-screen="home"] .masthead :is(.masthead-dates, .nadal-cover-characters) { display: none !important; }
+  body.nadal-native-app .app-home-months { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; margin-bottom: 22px; }
+  body.nadal-native-app .app-home-months button {
+    min-width: 0; min-height: 48px; border: 1px solid #555; border-radius: 999px;
+    background: #1c1c1c; color: #fff; font: 700 13px system-ui, sans-serif;
+  }
+  body.nadal-native-app .app-home-months button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  body.nadal-native-app[data-app-screen="home"] .masthead .nadal-cover-info { padding: 0 !important; }
+  body.nadal-native-app[data-app-screen="home"] .masthead .nadal-cover-info h2 {
+    font-family: Impact, 'Arial Narrow', sans-serif !important;
+    font-size: clamp(42px, 12vw, 67px) !important; line-height: 1.02 !important; letter-spacing: 0 !important; font-weight: 400 !important; color: #fff !important;
+  }
+  body.nadal-native-app[data-app-screen="home"] .masthead .nadal-cover-info p,
+  body.nadal-native-app[data-app-screen="home"] .masthead .nadal-cover-note { color: #e4e4e4 !important; }
+  body.nadal-redesign.nadal-native-app[data-app-screen="home"] .masthead.nadal-poster .nadal-cover-actions { display: grid !important; grid-template-columns: 1fr !important; gap: 9px !important; }
+  body.nadal-redesign.nadal-native-app[data-app-screen="home"] .masthead.nadal-poster .nadal-cover-actions .nadal-cover-action { min-height: 48px !important; border-radius: 999px !important; }
+  body.nadal-redesign.nadal-native-app[data-app-screen="home"] .masthead.nadal-poster .nadal-cover-actions .nadal-cover-action.calendar { background: #ffc83d !important; color: #000 !important; }
+  body.nadal-redesign.nadal-native-app[data-app-screen="home"] .masthead.nadal-poster .nadal-cover-actions .nadal-cover-action.proposal { background: #1c1c1c !important; color: #fff !important; border: 1px solid #666 !important; }
+  body.nadal-native-app[data-app-screen="home"] #home .home-winter-slides { display: none !important; }
+  body.nadal-native-app[data-app-screen="home"] #home .app-home-organizers {
+    width: auto !important; margin: 12px !important; padding: 24px !important;
+    border: 1px solid #2a3934 !important; border-radius: 25px !important;
+    background: radial-gradient(ellipse at 90% 10%, #284d3f 0%, #18372d 35%, #10221d 100%) !important;
+  }
+  body.nadal-native-app[data-app-screen="home"] #home .app-home-organizers .home-kicker { color: #c9f5df !important; }
+  body.nadal-native-app[data-app-screen="home"] #home .app-home-organizers .home-heading { color: #fff !important; font: 400 clamp(30px,9vw,46px)/1 Impact, 'Arial Narrow', sans-serif !important; letter-spacing: 0 !important; }
+  body.nadal-native-app[data-app-screen="home"] #home .app-home-organizers .home-text { color: #f1f7f3 !important; }
+  body.nadal-native-app[data-app-screen="home"] #home .app-home-accordion-section {
+    width: auto !important; margin: 10px 12px !important; padding: 0 !important;
+    border: 1px solid #333 !important; border-radius: 22px !important; background: #121212 !important;
+  }
+  body.nadal-native-app .app-home-accordion summary {
+    min-height: 64px; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; color: #fff; font: 800 18px/1.2 system-ui, sans-serif; cursor: pointer; list-style: none;
+  }
+  body.nadal-native-app .app-home-accordion summary::-webkit-details-marker { display: none; }
+  body.nadal-native-app .app-home-accordion summary::after { content: '+'; color: #ffc83d; font-size: 26px; }
+  body.nadal-native-app .app-home-accordion[open] summary::after { content: '−'; }
+  body.nadal-native-app .app-home-accordion-content { padding: 0 20px 20px; }
+  body.nadal-native-app .app-home-accordion-content .home-kicker { color: #e6e6e6 !important; }
+  body.nadal-native-app .app-home-accordion-content .home-heading { color: #fff !important; font-family: system-ui,sans-serif !important; font-size: 21px !important; }
+  body.nadal-native-app #home .app-home-accordion-content p { color: #e3e3e3 !important; }
+  body.nadal-native-app[data-app-screen="home"] .app-home-wheel-card {
+    margin: 12px; padding: 22px; border: 1px solid #3e3422; border-radius: 25px;
+    background: radial-gradient(ellipse at 90% 0%, #4a371c, #211b14 65%, #161411); color: #fff;
+  }
+  body.nadal-native-app .app-home-wheel-card h2 { margin: 0 0 12px; color: #fff; font: 900 29px/1 Impact, 'Arial Narrow', sans-serif; }
+  body.nadal-native-app .app-home-wheel-card .app-wheel-launch { min-height: 48px; margin: 0; color: #000; background: #ffc83d; border: 0; }
+  body.nadal-native-app[data-app-screen="home"] footer.footer { padding: 0 12px 20px !important; }
+  body.nadal-native-app[data-app-screen="home"] footer.footer .footer-shell { margin: 0 !important; padding: 20px !important; border: 1px solid #333; border-radius: 22px; background: #121212 !important; }
+  body.nadal-native-app[data-app-screen="home"] footer.footer .winter-mobile-social, body.nadal-native-app[data-app-screen="home"] footer.footer .winter-mobile-social a { color: #fff !important; }
+  body.nadal-native-app[data-app-screen="home"] footer.footer .winter-mobile-social a { min-height: 48px; align-items: center; }
+  body.nadal-native-app:not([data-app-screen="home"]) footer.footer { display: none !important; }
+}

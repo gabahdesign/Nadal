@@ -1,0 +1,67 @@
+@media (max-width: 760px) {
+  body.nadal-native-app #winterMobileActivitiesPage > :not(.app-categories-root) { display: none !important; }
+  body.nadal-native-app #winterMobileActivitiesPage .app-categories-root { display: block; padding: 22px 16px 36px; color: #fff; background: #000; }
+  body.nadal-native-app .app-category-title { margin: 0 0 10px; color: #fff; font: 400 clamp(34px,10vw,52px)/1.05 Impact,'Arial Narrow',sans-serif; letter-spacing: 0; }
+  body.nadal-native-app .app-category-subtitle { margin: 0 0 20px; color: #d4d4d4; line-height: 1.5; font: 15px/1.5 system-ui,sans-serif; }
+  body.nadal-native-app .app-category-months { display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px 20px; padding: 0 16px 6px; scrollbar-width: thin; }
+  body.nadal-native-app .app-category-months button { flex: 0 0 auto; min-height: 48px; padding: 0 16px; border: 1px solid #4e4e4e; border-radius: 999px; background: #1c1c1c; color: #fff; font: 700 13px system-ui,sans-serif; }
+  body.nadal-native-app .app-category-months button.selected { background: #ffc83d; color: #000; border-color: #ffc83d; }
+  body.nadal-native-app .app-category-special { display:flex; flex-direction:column; justify-content:center; width:100%; min-height:105px; padding:20px; margin-bottom:12px; text-align:left; border:0; border-radius:22px; background:#fff06a; color:#000; cursor:pointer; }
+  body.nadal-native-app .app-category-special strong { font:800 22px/1.1 system-ui,sans-serif; }
+  body.nadal-native-app .app-category-special span { margin-top:8px; font:600 13px system-ui,sans-serif; }
+  body.nadal-native-app .app-category-grid, body.nadal-native-app .app-plan-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+  body.nadal-native-app .app-category-block { position:relative; display:flex; flex-direction:column; justify-content:flex-end; min-width:0; min-height:190px; overflow:hidden; padding:0; border:0; border-radius:20px; background:var(--category-color); text-align:left; cursor:pointer; }
+  body.nadal-native-app .app-category-block > img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; mix-blend-mode:multiply; opacity:.42; }
+  body.nadal-native-app .app-category-copy { position:relative; display:flex; flex-direction:column; gap:5px; width:100%; min-height:70px; padding:12px; background:rgba(0,0,0,.82); color:#fff; }
+  body.nadal-native-app .app-category-copy strong { color:#fff; font:800 16px/1.12 system-ui,sans-serif; }
+  body.nadal-native-app .app-category-copy span { color:#e5e5e5; font:600 12px system-ui,sans-serif; }
+  body.nadal-native-app .app-category-note { color:#d4d4d4; font:14px/1.5 system-ui,sans-serif; }
+  body.nadal-native-app .app-category-header { display:flex; align-items:flex-start; gap:12px; margin-bottom:12px; }
+  body.nadal-native-app .app-category-header .app-category-subtitle { margin-bottom:0; }
+  body.nadal-native-app .app-category-back { flex:0 0 48px; display:inline-grid; place-items:center; width:48px; height:48px; margin-bottom:15px; border:1px solid #444; border-radius:50%; background:#1c1c1c; color:#fff; font-size:24px; cursor:pointer; }
+  body.nadal-native-app .app-plan-compact { display:flex; flex-direction:column; min-width:0; overflow:hidden; padding:0; border:1px solid #333; border-top:4px solid var(--category-color); border-radius:18px; background:#121212; color:#fff; text-align:left; cursor:pointer; }
+  body.nadal-native-app .app-plan-compact > img { width:100%; height:110px; object-fit:cover; background:#1c1c1c; }
+  body.nadal-native-app .app-plan-copy { display:flex; flex-direction:column; gap:8px; width:100%; padding:12px; }
+  body.nadal-native-app .app-plan-date, body.nadal-native-app .app-plan-place { color:#d4d4d4; font:12px/1.35 system-ui,sans-serif; overflow-wrap:anywhere; }
+  body.nadal-native-app .app-plan-title { color:#fff; font:800 16px/1.15 system-ui,sans-serif; overflow-wrap:anywhere; }
+  body.nadal-native-app .app-plan-detail { padding:0 0 20px; overflow:hidden; border:1px solid #333; border-radius:22px; background:#121212; color:#fff; }
+  body.nadal-native-app .app-plan-detail > img { width:100%; max-height:240px; object-fit:cover; background:#1c1c1c; }
+  body.nadal-native-app .app-plan-detail > :not(img) { margin-left:18px; margin-right:18px; }
+  body.nadal-native-app .app-plan-detail .app-plan-category { display:inline-block; padding:8px 12px; border-left:5px solid var(--category-color); border-radius:8px; background:#252525; color:#fff; font-weight:800; }
+  body.nadal-native-app .app-plan-detail p { color:#e5e5e5; font:15px/1.5 system-ui,sans-serif; overflow-wrap:anywhere; }
+  body.nadal-native-app .app-plan-detail .app-photo-credit { font-size:12px; }
+  body.nadal-native-app .app-plan-links { display:flex; flex-wrap:wrap; gap:8px; }
+  body.nadal-native-app .app-plan-links a { display:inline-flex; align-items:center; min-height:48px; padding:0 14px; border:1px solid #777; border-radius:999px; color:#fff; font-weight:700; }
+  body.nadal-native-app .app-plan-detail a { color:#fff; }
+  body.nadal-native-app .app-categories-root button:focus-visible, body.nadal-native-app .app-categories-root a:focus-visible { outline:3px solid #fff; outline-offset:3px; }
+}
+@media (max-width:760px) {
+  body.nadal-native-app .app-gathering { display:grid; gap:18px; padding-bottom:24px; }
+  body.nadal-native-app .app-gathering-hero { padding:26px 22px; border:0; border-radius:26px; background:radial-gradient(circle at 90% 0%,#896b30 0,transparent 48%),linear-gradient(145deg,#a52d39,#651823 80%); color:#fff; }
+  body.nadal-native-app .app-gathering-kicker { color:#ffdd85; font:800 11px/1.4 system-ui,sans-serif; letter-spacing:.12em; }
+  body.nadal-native-app .app-gathering-hero h1 { margin:12px 0; color:#fff; font:800 clamp(32px,9vw,48px)/1 system-ui,sans-serif; letter-spacing:-.04em; }
+  body.nadal-native-app .app-gathering-hero p:last-child { color:#f0eee5; line-height:1.5; }
+  body.nadal-redesign.nadal-native-app .app-gathering .quedada-experience { margin:0; gap:16px; }
+  body.nadal-redesign.nadal-native-app .app-gathering .quedada-route { padding:20px 16px; border:0; border-radius:24px; background:#6f2029; color:#f7f9fc; box-shadow:none; }
+  body.nadal-redesign.nadal-native-app .app-gathering :is(.quedada-route-title,.quedada-itinerary-heading,.quedada-markets h4,.quedada-detail-block .home-heading,.quedada-market-row b,.quedada-route-stop) { color:#fff; }
+  body.nadal-redesign.nadal-native-app .app-gathering :is(.quedada-route-intro,.quedada-route-note,.quedada-detail-block .home-text,.quedada-experience>.home-text,.quedada-market-row small,.quedada-route-list li,.cozy-gift-rules) { color:#f5f1eb; }
+  body.nadal-redesign.nadal-native-app .app-gathering .quedada-route-facts span { background:#242427; color:#fff; min-height:44px; }
+  body.nadal-redesign.nadal-native-app .app-gathering .quedada-infographic { background:#1b1b1e; border:0; }
+  body.nadal-redesign.nadal-native-app .app-gathering .quedada-map-canvas { height:420px!important; }
+  body.nadal-redesign.nadal-native-app .app-gathering .quedada-map-key { background:#242427; }
+  body.nadal-redesign.nadal-native-app .app-gathering :is(.quedada-map-key-item b,.quedada-map-key-item small) { color:#f6f5e9; }
+  body.nadal-redesign.nadal-native-app .app-gathering .quedada-infographic figcaption { background:#1b1b1e; color:#f5f1eb; }
+  body.nadal-redesign.nadal-native-app .app-gathering :is(.quedada-route-source,.quedada-market-link) { color:#ffda77; }
+  body.nadal-redesign.nadal-native-app .app-gathering :is(.quedada-route-time,.quedada-detail-kicker) { color:#ffd879; }
+  body.nadal-redesign.nadal-native-app .app-gathering .quedada-gathering-details { padding:0 16px; border:0; border-radius:24px; background:#6f2029; }
+  body.nadal-redesign.nadal-native-app .app-gathering :is(.quedada-detail-block,.quedada-market-row,.quedada-route-list li) { border-color:rgba(255,232,199,.2); }
+  body.nadal-redesign.nadal-native-app .app-gathering .quedada-market-row:hover { background:#84313a; }
+  body.nadal-redesign.nadal-native-app .app-gathering .quedada-map-marker-icon, body.nadal-redesign.nadal-native-app .app-gathering .quedada-map-key-number { background:#7b202b; color:#fff; }
+  body.nadal-redesign.nadal-native-app .app-gathering .quedada-map-marker-icon.is-market, body.nadal-redesign.nadal-native-app .app-gathering .quedada-map-key-item.is-market .quedada-map-key-number { background:#e7bf60; color:#291b0d; }
+  body.nadal-native-app .app-gathering-hero p { color:#fff; }
+  body.nadal-redesign.nadal-native-app .app-gathering .home-text { color:#f5f1eb!important; }
+  body.nadal-redesign.nadal-native-app .app-gathering .cozy-gift-rules li { background:#242427; color:#fff; }
+  body.nadal-redesign.nadal-native-app .app-gathering .cozy-gift-rules li::before, body.nadal-redesign.nadal-native-app .app-gathering .quedada-market-number { background:#e7bf60; color:#221b12; }
+  body.nadal-redesign.nadal-native-app .app-gathering .quedada-route-list li::before, body.nadal-redesign.nadal-native-app .app-gathering .quedada-map-marker-icon.is-after, body.nadal-redesign.nadal-native-app .app-gathering .quedada-map-key-item.is-after .quedada-map-key-number { background:#242427; color:#fff; }
+  body.nadal-redesign.nadal-native-app .app-gathering .quedada-route-links a { min-height:48px; background:#e7bf60; color:#221b12!important; }
+}

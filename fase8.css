@@ -1,0 +1,18 @@
+@media (max-width:760px) {
+  body.nadal-redesign.nadal-native-app[data-app-screen="proposal"] #nadalProposalSection { padding:24px 16px 120px; }
+  body.nadal-redesign.nadal-native-app #nadalProposalSection .home-kicker { display:none!important; }
+  body.nadal-redesign.nadal-native-app #nadalProposalSection .home-heading { font:800 36px/1.05 system-ui,sans-serif; letter-spacing:-.04em; margin:0 0 16px; }
+  body.nadal-redesign.nadal-native-app #nadalProposalSection .proposal-intro { color:#e3e3e3!important; line-height:1.5; margin:0 0 24px; }
+  body.nadal-redesign.nadal-native-app #nadalProposalForm { display:grid; grid-template-columns:1fr; gap:14px; }
+  body.nadal-redesign.nadal-native-app #nadalProposalForm[hidden] { display:none!important; }
+  body.nadal-redesign.nadal-native-app #nadalProposalForm .proposal-field { display:block; font-size:0!important; }
+  body.nadal-redesign.nadal-native-app #nadalProposalForm :is(input,textarea) { width:100%; min-height:52px; padding:15px 16px; border:1px solid #555!important; border-radius:16px; background:#1c1c1c!important; color:#fff!important; font:16px/1.45 system-ui,sans-serif!important; }
+  body.nadal-redesign.nadal-native-app #nadalProposalForm textarea { min-height:110px; resize:vertical; }
+  body.nadal-redesign.nadal-native-app #nadalProposalForm :is(input,textarea)::placeholder { color:#d4d4d4!important; opacity:1; }
+  body.nadal-redesign.nadal-native-app #nadalProposalForm :is(input,textarea):focus-visible { outline:3px solid #ffc83d; outline-offset:2px; }
+  body.nadal-redesign.nadal-native-app #nadalProposalForm .proposal-submit { width:100%; min-height:52px; border:0; border-radius:999px; background:#ffc83d!important; color:#17120a!important; font:800 15px/1 system-ui,sans-serif; }
+  body.nadal-redesign.nadal-native-app #nadalProposalStatus { color:#fff!important; min-height:1.5em; line-height:1.5; }
+  body.nadal-redesign.nadal-native-app .app-proposal-confirmation { padding:24px; border-radius:22px; background:#1c1c1c; color:#fff; }
+  body.nadal-redesign.nadal-native-app .app-proposal-confirmation h2 { color:#fff; font:700 22px/1.25 system-ui,sans-serif; }
+  body.nadal-redesign.nadal-native-app .app-proposal-confirmation button { min-height:48px; padding:12px 18px; border:0; border-radius:999px; background:#ffc83d; color:#17120a; font-weight:700; }
+}

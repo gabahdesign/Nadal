@@ -6,7 +6,8 @@
   "scripts": {
     "prepare:web": "node prepare-web.mjs",
     "android:add": "npm run prepare:web && cap add android",
-    "android:sync": "npm run prepare:web && cap sync android"
+    "android:sync": "npm run prepare:web && cap sync android",
+    "prepare:pages": "npm run prepare:web && node prepara-pages.mjs"
   },
   "dependencies": {
     "@capacitor/android": "^8.0.0",
