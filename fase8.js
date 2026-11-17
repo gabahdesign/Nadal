@@ -13,6 +13,21 @@
       if (label) input.setAttribute('aria-label', label);
       input.placeholder = placeholders[input.name] || label || '';
     });
+    const spanish = new URLSearchParams(location.search).get('lang') === 'es';
+    const date = form.elements.date_proposed;
+    const time = form.elements.schedule;
+    [[date, 'date', spanish ? 'Fecha propuesta (opcional)' : 'Data proposada (opcional)'], [time, 'time', spanish ? 'Hora propuesta (opcional)' : 'Hora proposada (opcional)']].forEach(([input, type, label]) => {
+      if (!input) return;
+      input.type = type; input.required = false; input.removeAttribute('maxlength'); input.removeAttribute('placeholder');
+      input.setAttribute('aria-label', label); input.setAttribute('aria-describedby', 'proposal-date-note');
+      const visibleLabel = document.createElement('span'); visibleLabel.className = 'app-proposal-date-label'; visibleLabel.textContent = label;
+      input.before(visibleLabel);
+    });
+    if (time) {
+      const note = document.createElement('p'); note.id = 'proposal-date-note'; note.className = 'app-proposal-date-note';
+      note.textContent = spanish ? 'Si no indicas fecha u hora, las elegiremos nosotros. Aunque las indiques, no podemos garantizar que el plan se haga en el horario propuesto.' : 'Si no indiques data o hora, les triarem nosaltres. Encara que les indiquis, no podem assegurar que el pla es faci en l’horari proposat.';
+      time.closest('.proposal-field').after(note);
+    }
     const status = form.querySelector('#nadalProposalStatus');
     const submit = form.querySelector('[type="submit"]');
     form.addEventListener('submit', async event => {
