@@ -8,6 +8,10 @@ const desktop=await readFile(resolve(root,'../index.html'),'utf8');
 const redirect=`<script>if(window.matchMedia('(max-width: 760px)').matches){var moveApp=new URL('nadal-mobile.html',location.href);moveApp.search=location.search;if(!moveApp.searchParams.has('project'))moveApp.searchParams.set('project','nadal');if(!moveApp.searchParams.has('lang'))moveApp.searchParams.set('lang','ca');location.replace(moveApp.href);}</script>`;
 if(!desktop.includes('<head>'))throw new Error('No s’ha trobat la capçalera del web.');
 await writeFile(resolve(output,'index.html'),desktop.replace('<head>','<head>'+redirect));
+// Older shared links should open the same mobile experience on GitHub Pages.
+const legacyRedirect=`<script id="nadal-mobile-redirect">if(/(^|\\.)github\\.io$/.test(location.hostname)&&!location.pathname.endsWith('/nadal-mobile.html')&&window.matchMedia('(max-width: 760px)').matches){var moveApp=new URL('nadal-mobile.html',location.href);moveApp.search=location.search;if(!moveApp.searchParams.has('project'))moveApp.searchParams.set('project','nadal');if(!moveApp.searchParams.has('lang'))moveApp.searchParams.set('lang','ca');location.replace(moveApp.href);}</script>`;
+for(const name of ['nadal-app.html','plantilla-evento.html']) {let original=await readFile(resolve(root,'..',name),'utf8');if(!original.includes('id="nadal-mobile-redirect"'))original=original.replace('<head>','<head>'+legacyRedirect);await writeFile(resolve(output,name),original);}
+
 let mobile=await readFile(resolve(root,'www/index.html'),'utf8');
 mobile=mobile.replace('src="nadal-app.js?v=map-navigation-2"','src="nadal-mobile-runtime.js?v=map-navigation-2"');
 mobile=mobile.replace("var moveBasePath = window.location.pathname.replace(/\\/plantilla-evento\\.html\\/?$/, '').replace(/\\/$/, '') || '/move';", "var moveBasePath = 'https://descobreix.com/move';");
