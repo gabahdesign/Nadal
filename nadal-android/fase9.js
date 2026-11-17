@@ -20,25 +20,23 @@
     const intro=make('p','app-wheel-v2-intro','Activitats vigents i futures amb dates conegudes.');
     const refreshChoices=make('button','app-wheel-v2-refresh');refreshChoices.type='button';refreshChoices.setAttribute('aria-label','Mostrar altres plans aleatoris');refreshChoices.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8" cy="8" r="1" fill="currentColor"/><circle cx="16" cy="8" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="8" cy="16" r="1" fill="currentColor"/><circle cx="16" cy="16" r="1" fill="currentColor"/></svg><span>Mostra altres plans</span>';
     const stage=make('div','app-wheel-v2-stage');const pointer=make('span','app-wheel-v2-pointer');pointer.setAttribute('aria-hidden','true');const disc=make('div','app-wheel-v2-disc');disc.setAttribute('aria-hidden','true');stage.append(pointer,disc);
-    const legend=make('ol','app-wheel-v2-legend');legend.setAttribute('aria-label','Activitats de la ruleta');
     const message=make('p','app-wheel-v2-message');message.setAttribute('aria-live','polite');
     const result=make('div','app-wheel-v2-result');result.setAttribute('aria-live','polite');
     const spin=make('button','app-wheel-v2-spin','Girar');spin.type='button';const view=make('button','app-wheel-v2-view','Veure activitat');view.type='button';view.hidden=true;
-    dialog.append(head,intro,settings,stage,refreshChoices,legend,message,result,spin,view);document.body.appendChild(dialog);
+    dialog.append(head,intro,settings,stage,refreshChoices,spin,message,result,view);document.body.appendChild(dialog);
     let choices=[], picked=null, angle=0, timer=null, spinning=false;
     const colorFor=item=>(window.NadalActivities.getCategories().find(c=>c[0]===item.categoria)||['','#d6b900'])[1];
     const shuffle=items=>{const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
     function candidates(){return window.NadalActivities.getAll().filter(item=>selected.has(item.categoria) && window.NadalWheelDates.eligible(item));}
     function paint(){
-      choices=shuffle(candidates()).slice(0,12);picked=null;angle=0;disc.style.transition='none';disc.style.transform='rotate(0deg)';result.replaceChildren();view.hidden=true;legend.replaceChildren();disc.replaceChildren();
+      choices=shuffle(candidates()).slice(0,12);picked=null;angle=0;disc.style.transition='none';disc.style.transform='rotate(0deg)';result.replaceChildren();view.hidden=true;disc.replaceChildren();
       spin.disabled=!choices.length;stage.hidden=!choices.length;
       refreshChoices.disabled=choices.length<2;
       message.textContent=choices.length ? '' : (selected.size ? 'No hi ha activitats amb dates vigents o futures per a les categories seleccionades.' : 'Selecciona almenys una categoria als ajustos.');
       if (!choices.length) return;
       const size=360/choices.length;disc.style.background=`conic-gradient(${choices.map((item,i)=>`${colorFor(item)} ${i*size}deg ${(i+1)*size}deg`).join(',')})`;
       choices.forEach((item,i)=>{
-        const number=make('span','app-wheel-v2-number'); const chip=[...document.querySelectorAll('.winter-mobile-category-chip')].find(x=>x.textContent.trim()===item.categoria); const icon=chip?.querySelector('svg'); if(icon) number.appendChild(icon.cloneNode(true)); number.appendChild(make('span','',String(i+1)));number.style.transform=`rotate(${(i+.5)*size}deg) translateY(-105px) rotate(-${(i+.5)*size}deg)`;disc.appendChild(number);
-        const li=make('li','','');const bullet=make('span','',String(i+1));bullet.style.background=colorFor(item);li.append(bullet,document.createTextNode(item.titol));legend.appendChild(li);
+        const marker=make('span','app-wheel-v2-number'); const chip=[...document.querySelectorAll('.winter-mobile-category-chip')].find(x=>x.textContent.trim()===item.categoria); const icon=chip?.querySelector('svg'); if(icon)marker.appendChild(icon.cloneNode(true));else marker.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg>';marker.style.transform=`rotate(${(i+.5)*size}deg) translateY(-105px) rotate(-${(i+.5)*size}deg)`;disc.appendChild(marker);
       });
     }
     launch.onclick=()=>{spin.textContent='Girar';paint();backdrop.hidden=false;dialog.show();};
