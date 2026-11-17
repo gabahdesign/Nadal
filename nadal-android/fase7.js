@@ -11,27 +11,29 @@
   const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;};
   const root=el('main','app-map-screen');root.id='app-map-v2';root.setAttribute('aria-label','Mapa');
   const title=el('h1','app-map-title','Mapa');
-  const copy=el('p','app-map-copy','Consulta al mapa les ubicacions contrastades i, a la llista, tots els plans.');
+  const copy=el('p','app-map-copy','Consulta tots els plans al mapa. Les ubicacions no verificades són orientatives.');
   const count=el('p','app-map-count','Carregant ubicacions…'); count.setAttribute('aria-live','polite');
   const precision=el('p','app-map-precision','Algunes coordenades són aproximades.');
   const filters=el('nav','app-map-filters');filters.setAttribute('aria-label','Filtra per categoria');
   const mapFrame=el('div','app-map-frame'); const mapNode=el('div','app-map-canvas');mapNode.id='app-map-canvas';mapNode.setAttribute('aria-label','Mapa de les activitats');mapFrame.appendChild(mapNode);
-  const center=el('button','app-map-center','Centrar a Catalunya');center.type='button';
+  const center=el('button','app-map-center','Mostra totes');center.type='button';
   const status=el('p','app-map-status','');status.setAttribute('role','status');status.hidden=true;
   const sheet=el('section','app-map-sheet');sheet.hidden=true;sheet.setAttribute('aria-label','Activitat seleccionada');
   const sheetToggle=el('button','app-map-sheet-handle','');sheetToggle.type='button';sheetToggle.setAttribute('aria-label','Ampliar o reduir la fitxa');sheetToggle.setAttribute('aria-expanded','false');
   const sheetContent=el('div','app-map-sheet-content');sheet.append(sheetToggle,sheetContent);mapFrame.append(center,status,sheet);
   const directory=el('details','app-map-directory');const summary=el('summary','','Llista d’ubicacions i enllaços per arribar-hi');const directoryContent=el('div','app-map-directory-content');directory.append(summary,directoryContent);
   root.append(title,copy,count,precision,filters,mapFrame,directory);
-  let map=null, group=null, category=null, selected=null, tileErrors=0;
+  let map=null, group=null, category=null, selected=null, tileErrors=0, initialFit=false;
   const activities=()=>window.NadalActivities?.getAll() || [];
   const categories=()=>window.NadalActivities?.getCategories() || [];
   const valid=x=>x.ubicacioVerificada===true&&Number.isFinite(x.lat)&&Number.isFinite(x.lng)&&Math.abs(x.lat)<=90&&Math.abs(x.lng)<=180;
+  const coords=x=>Number.isFinite(x.lat)&&Number.isFinite(x.lng)&&Math.abs(x.lat)<=90&&Math.abs(x.lng)<=180?[x.lat,x.lng]:(x.id==='move-gran-quedada-de-nadal'?[41.3851,2.1734]:null);
   const color=x=>categories().find(c=>c[0]===x.categoria)?.[1] || '#d6b900';
   function button(label,pressed,onClick,colorValue){const b=el('button',pressed?'selected':'');b.type='button';b.setAttribute('aria-pressed',String(pressed));if(colorValue){const dot=el('i','');dot.style.background=colorValue;dot.setAttribute('aria-hidden','true');b.appendChild(dot);}b.append(document.createTextNode(label));b.addEventListener('click',onClick);return b;}
   function drawFilters(){
     filters.replaceChildren();filters.appendChild(button('Totes',!category,()=>{category=null;refresh();}));
-    categories().filter(c=>activities().some(x=>x.categoria===c[0]&&valid(x))).forEach(c=>filters.appendChild(button(c[0],category===c[0],()=>{category=c[0];refresh();},c[1])));
+    const available=categories().slice();if(activities().some(x=>x.categoria==='Gran quedada de Nadal'))available.push(['Gran quedada de Nadal','#d6b900']);
+    available.filter(c=>activities().some(x=>x.categoria===c[0]&&coords(x))).forEach(c=>filters.appendChild(button(c[0],category===c[0],()=>{category=c[0];refresh();},c[1])));
   }
   function detail(item){const previousScroll=window.scrollY;window.NadalActivities.open(item.id,()=>{document.querySelector('.app-bottom-nav [data-screen="map"]')?.click();requestAnimationFrame(()=>window.scrollTo(0,previousScroll));});}
   function showSheet(item){
@@ -41,7 +43,7 @@
     [["Lloc",item.lloc],["Data",item.trobadaMove?.data || item.periode || 'Pendent de confirmar'],["Estat",state]].forEach(([name,value])=>{const cell=el('span','');cell.append(el('b','',name),el('span','',value));data.appendChild(cell);});
     const more=el('button','app-map-details','Veure detall');more.type='button';more.addEventListener('click',()=>detail(item));
     const close=el('button','app-map-close','×');close.type='button';close.setAttribute('aria-label','Tanca la fitxa');close.addEventListener('click',()=>{sheet.hidden=true;selected=null;});
-    const precisionNote=el('p','app-map-sheet-precision',item.precisioCoordenades || '');
+    const precisionNote=el('p','app-map-sheet-precision',valid(item)?(item.precisioCoordenades || ''):'Ubicació orientativa dins del municipi: el punt exacte de l’activitat no està verificat.');
     sheetContent.append(close,badge,compact,data,precisionNote,more);
   }
   function setExpanded(open){sheet.classList.toggle('expanded',open);sheetToggle.setAttribute('aria-expanded',String(open));}
@@ -49,19 +51,21 @@
   sheetToggle.addEventListener('click',()=>{if(didSwipe){didSwipe=false;return;}setExpanded(!sheet.classList.contains('expanded'));});
   sheetToggle.addEventListener('touchstart',e=>{startY=e.changedTouches[0].clientY;didSwipe=false;},{passive:true});sheetToggle.addEventListener('touchend',e=>{if(startY===null)return;const delta=e.changedTouches[0].clientY-startY;if(Math.abs(delta)>25){didSwipe=true;setExpanded(delta<0);}startY=null;},{passive:true});
   function drawDirectory(items){
-    directoryContent.replaceChildren();items.forEach(item=>{const row=el('div','app-map-directory-row');const name=el('button','',item.titol+(valid(item)?'':' · ubicació pendent de validar'));name.type='button';name.addEventListener('click',()=>{if(!map||!valid(item)){detail(item);return;}map.setView([item.lat,item.lng],13);showSheet(item);mapFrame.scrollIntoView({behavior:'smooth',block:'center'});});row.append(name);if(item.mapsUrl&&valid(item)){const link=el('a','','Com arribar-hi');link.href=item.mapsUrl;link.target='_blank';link.rel='noopener noreferrer';row.appendChild(link);}directoryContent.appendChild(row);});
+    directoryContent.replaceChildren();items.forEach(item=>{const row=el('div','app-map-directory-row');const name=el('button','',item.titol+(valid(item)?'':' · ubicació orientativa'));name.type='button';name.addEventListener('click',()=>{if(!map||!coords(item)){detail(item);return;}map.setView(coords(item),13);showSheet(item);mapFrame.scrollIntoView({behavior:'smooth',block:'center'});});row.append(name);if(item.mapsUrl&&valid(item)){const link=el('a','','Com arribar-hi');link.href=item.mapsUrl;link.target='_blank';link.rel='noopener noreferrer';row.appendChild(link);}directoryContent.appendChild(row);});
   }
   function refresh(){
     if(!map||!group)return;
-    const all=activities().filter(valid);const shown=all.filter(x=>!category||x.categoria===category);const unique=new Set(all.map(x=>`${x.lat},${x.lng}`)).size;const pending=activities().filter(x=>!valid(x));
-    count.textContent=category?`${shown.length} plans amb ubicació contrastada · ${category}`:`${all.length} plans amb ubicació contrastada · ${unique} punts diferents`;
-    precision.textContent=`${pending.length} plans sense coordenades contrastades: consulta la llista. Alguns punts són orientatius dins del recinte.`;
+    const all=activities().filter(x=>coords(x));const shown=all.filter(x=>!category||x.categoria===category);const pending=all.filter(x=>!valid(x));
+    count.textContent=category?`${shown.length} plans al mapa · ${category}`:`${all.length} plans al mapa`;
+    precision.textContent=`${pending.length} plans tenen ubicació orientativa, no exacta. Consulta la fitxa de cada pla.`;
     drawFilters();drawDirectory(activities().filter(x=>!category||x.categoria===category));group.clearLayers();sheet.hidden=true;selected=null;
     shown.forEach(item=>{
-      const pin=L.divIcon({className:'app-map-pin-container',html:'<span class="app-map-pin" style="--pin-color:'+color(item)+'"></span>',iconSize:[44,44],iconAnchor:[22,22]});
-      const marker=L.marker([item.lat,item.lng],{icon:pin,title:item.titol,alt:item.titol,keyboard:true});marker.on('click',()=>showSheet(item));group.addLayer(marker);
+      const pin=L.divIcon({className:'app-map-pin-container',html:'<span class="app-map-pin'+(valid(item)?'':' is-approximate')+'" style="--pin-color:'+color(item)+'"></span>',iconSize:[44,44],iconAnchor:[22,22]});
+      const marker=L.marker(coords(item),{icon:pin,title:item.titol+(valid(item)?'':' · ubicació orientativa'),alt:item.titol,keyboard:true});marker.on('click',()=>showSheet(item));group.addLayer(marker);
     });
+    if (!initialFit && shown.length && document.body.dataset.appScreen === 'map') { initialFit=true; requestAnimationFrame(fitAll); }
   }
+  function fitAll(){if(!map || !group)return;const bounds=group.getBounds();if(bounds.isValid()){map.invalidateSize();map.fitBounds(bounds,{padding:[28,28],maxZoom:11});}}
   function initMap(){
     if(map){setTimeout(()=>map.invalidateSize(),100);return;}
     if(!window.L || !L.markerClusterGroup){status.hidden=false;status.textContent='No s’ha pogut carregar el mapa. La llista d’ubicacions continua disponible.';const items=activities().filter(valid);count.textContent=items.length+' plans amb ubicació';drawDirectory(activities().filter(x=>!category||x.categoria===category));return;}
@@ -71,7 +75,7 @@
     tiles.on('tileerror',()=>{if(++tileErrors>=4){status.hidden=false;status.textContent='No es poden carregar les imatges del mapa. Comprova la connexió.';}});
     tiles.on('tileload',()=>{tileErrors=0;status.hidden=true;});tiles.addTo(map);
     group=L.markerClusterGroup({showCoverageOnHover:false,spiderfyOnMaxZoom:true,maxClusterRadius:46,iconCreateFunction:cluster=>L.divIcon({className:'app-map-cluster-container',html:'<span class="app-map-cluster">'+cluster.getChildCount()+'</span>',iconSize:[48,48]})});map.addLayer(group);
-    center.addEventListener('click',()=>map.setView([41.8,1.8],7.5));refresh();setTimeout(()=>map.invalidateSize(),100);
+    center.addEventListener('click',()=>{category=null;refresh();fitAll();});refresh();setTimeout(()=>map.invalidateSize(),100);
   }
   function init(){
     const button=document.querySelector('.app-bottom-nav [data-screen="map"]');if(!button || !window.NadalActivities)return false;

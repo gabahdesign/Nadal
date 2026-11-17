@@ -97,6 +97,7 @@
     card.append(media,band);
     const body=el('div','app-plan-body');
     if(item.lloc)body.appendChild(el('p','app-plan-location',item.lloc));
+    if(item.ubicacioVerificada === false)body.appendChild(el('p','app-plan-location-note','Ubicació orientativa al mapa: el punt exacte no està verificat.'));
     body.appendChild(el('h1','app-plan-detail-title',item.titol));
     if(item.descripcio)body.appendChild(el('p','app-plan-description',item.descripcio));
     const facts=el('dl','app-plan-facts');

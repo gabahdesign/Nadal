@@ -17,19 +17,21 @@
     try { const saved=JSON.parse(localStorage.getItem('nadal_wheel_categories')); if(Array.isArray(saved)) selected=new Set(saved.filter(x=>allCategories.includes(x))); } catch (_) {}
     allCategories.forEach(name=>{const label=make('label','app-wheel-v2-category');const input=document.createElement('input');input.type='checkbox';input.checked=selected.has(name);input.addEventListener('change',()=>{if(spinning){input.checked=selected.has(name);return;}if(input.checked)selected.add(name);else selected.delete(name);try{localStorage.setItem('nadal_wheel_categories',JSON.stringify([...selected]));}catch(_){}spin.textContent='Girar';paint();});label.append(input,make('span','',name));categoryList.appendChild(label);});
     const intro=make('p','app-wheel-v2-intro','Activitats vigents i futures amb dates conegudes.');
+    const refreshChoices=make('button','app-wheel-v2-refresh');refreshChoices.type='button';refreshChoices.setAttribute('aria-label','Mostrar altres plans aleatoris');refreshChoices.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8" cy="8" r="1" fill="currentColor"/><circle cx="16" cy="8" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="8" cy="16" r="1" fill="currentColor"/><circle cx="16" cy="16" r="1" fill="currentColor"/></svg><span>Mostra altres plans</span>';
     const stage=make('div','app-wheel-v2-stage');const pointer=make('span','app-wheel-v2-pointer');pointer.setAttribute('aria-hidden','true');const disc=make('div','app-wheel-v2-disc');disc.setAttribute('aria-hidden','true');stage.append(pointer,disc);
     const legend=make('ol','app-wheel-v2-legend');legend.setAttribute('aria-label','Activitats de la ruleta');
     const message=make('p','app-wheel-v2-message');message.setAttribute('aria-live','polite');
     const result=make('div','app-wheel-v2-result');result.setAttribute('aria-live','polite');
     const spin=make('button','app-wheel-v2-spin','Girar');spin.type='button';const view=make('button','app-wheel-v2-view','Veure activitat');view.type='button';view.hidden=true;
-    dialog.append(head,intro,settings,stage,legend,message,result,spin,view);document.body.appendChild(dialog);
+    dialog.append(head,intro,settings,stage,refreshChoices,legend,message,result,spin,view);document.body.appendChild(dialog);
     let choices=[], picked=null, angle=0, timer=null, spinning=false;
     const colorFor=item=>(window.NadalActivities.getCategories().find(c=>c[0]===item.categoria)||['','#d6b900'])[1];
     const shuffle=items=>{const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
     function candidates(){return window.NadalActivities.getAll().filter(item=>selected.has(item.categoria) && window.NadalWheelDates.eligible(item));}
     function paint(){
-      choices=shuffle(candidates()).slice(0,12);picked=null;result.replaceChildren();view.hidden=true;legend.replaceChildren();disc.replaceChildren();
+      choices=shuffle(candidates()).slice(0,12);picked=null;angle=0;disc.style.transition='none';disc.style.transform='rotate(0deg)';result.replaceChildren();view.hidden=true;legend.replaceChildren();disc.replaceChildren();
       spin.disabled=!choices.length;stage.hidden=!choices.length;
+      refreshChoices.disabled=choices.length<2;
       message.textContent=choices.length ? '' : (selected.size ? 'No hi ha activitats amb dates vigents o futures per a les categories seleccionades.' : 'Selecciona almenys una categoria als ajustos.');
       if (!choices.length) return;
       const size=360/choices.length;disc.style.background=`conic-gradient(${choices.map((item,i)=>`${colorFor(item)} ${i*size}deg ${(i+1)*size}deg`).join(',')})`;
@@ -38,10 +40,12 @@
         const li=make('li','','');const bullet=make('span','',String(i+1));bullet.style.background=colorFor(item);li.append(bullet,document.createTextNode(item.titol));legend.appendChild(li);
       });
     }
-    launch.onclick=()=>{spin.textContent='Girar';paint();dialog.showModal();};
+    launch.onclick=()=>{spin.textContent='Girar';paint();dialog.show();};
+    document.querySelector('.app-bottom-nav')?.addEventListener('click',event=>{if(dialog.open && event.target.closest('button'))dialog.close();});
+    refreshChoices.onclick=()=>{if(spinning)return;spin.textContent='Girar';paint();};
     settingsToggle.addEventListener('click',event=>{if(spinning)event.preventDefault();});
     close.onclick=()=>dialog.close();
-    dialog.addEventListener('close',()=>{clearTimeout(timer);spinning=false;spin.disabled=false;settingsToggle.removeAttribute('aria-disabled');disc.style.transition='none';});
+    dialog.addEventListener('close',()=>{clearTimeout(timer);spinning=false;spin.disabled=false;refreshChoices.disabled=false;settingsToggle.removeAttribute('aria-disabled');disc.style.transition='none';});
     spin.onclick=()=>{
       if(spinning)return;
       // Recheck against the clock each time, including after midnight.
@@ -51,8 +55,8 @@
       const destination=(360-((index+.5)*size))%360;angle+=1800+((destination-(angle%360)+360)%360);
       const reduced=document.documentElement.classList.contains('winter-motion-off')||matchMedia('(prefers-reduced-motion: reduce)').matches;
       disc.style.transition=reduced?'none':'transform 4.5s cubic-bezier(.12,.65,.12,1)';disc.style.transform=`rotate(${angle}deg)`;
-      spinning=true;spin.disabled=true;settingsToggle.setAttribute('aria-disabled','true');message.textContent='Girant…';
-      timer=setTimeout(()=>{spinning=false;spin.disabled=false;settingsToggle.removeAttribute('aria-disabled');spin.textContent='Girar una altra vegada';message.textContent='';const card=window.NadalActivities.compact(picked,{returnScreen:'home',moveDate:true}); card.addEventListener('click',()=>dialog.close(),true); result.appendChild(card);view.hidden=false;},reduced?0:4500);
+      spinning=true;spin.disabled=true;refreshChoices.disabled=true;settingsToggle.setAttribute('aria-disabled','true');message.textContent='Girant…';
+      timer=setTimeout(()=>{spinning=false;spin.disabled=false;refreshChoices.disabled=choices.length<2;settingsToggle.removeAttribute('aria-disabled');spin.textContent='Girar una altra vegada';message.textContent='';const card=window.NadalActivities.compact(picked,{returnScreen:'home',moveDate:true}); card.addEventListener('click',()=>dialog.close(),true); result.appendChild(card);view.hidden=false;},reduced?0:4500);
     };
     view.onclick=()=>{const id=picked?.id;if(!id)return;dialog.close();window.NadalActivities.open(id,()=>document.querySelector('.app-bottom-nav [data-screen="home"]')?.click());};
     return true;

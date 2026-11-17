@@ -10,7 +10,7 @@
     {text:'Toca un marcador per veure els detalls de l’activitat.', map:true},
     {text:'Des d’aquí pots proposar una activitat. Arriba al nostre correu i la revisarem.', selector:'.app-bottom-nav [data-screen="proposal"]'},
     {text:'Torna a Inici per descobrir la ruleta.', selector:'.app-bottom-nav [data-screen="home"]'},
-    {text:'Si no saps què fer, gira la ruleta.', selector:'.app-home-wheel-card .app-wheel-launch'},
+    {text:'Si no saps què fer, gira la ruleta.', selector:'.app-home-wheel-card.app-wheel-launch'},
     {text:'Toca Girar i la ruleta triarà un pla.', selector:'.app-wheel-v2[open] .app-wheel-v2-spin'}
   ];
   const shell=document.createElement('div');shell.className='app-tour';
