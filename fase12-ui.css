@@ -62,3 +62,4 @@
  body.nadal-native-app .app-wheel-v2-number svg {width:20px;height:20px;}
 }
 @media(max-width:760px){body.nadal-redesign.nadal-native-app #nadalProposalForm .app-proposal-date-label{display:block;margin:0 0 7px 2px;color:#fff;font:700 13px/1.4 system-ui,sans-serif;}body.nadal-redesign.nadal-native-app #nadalProposalForm .app-proposal-date-note{margin:0 2px 6px;color:#d4d4d4;font:13px/1.5 system-ui,sans-serif;}body.nadal-redesign.nadal-native-app #nadalProposalForm input:is([type=date],[type=time]){color-scheme:dark;}}
+@media(max-width:760px){body.nadal-native-app #winterSettings .winter-mobile-settings-links a[data-winter-mobile-link="coffee"]::after{content:'';position:absolute;right:-22px;bottom:-25px;width:205px;height:160px;background:url('./cafe-web.png') center/contain no-repeat;transform:rotate(-12deg);pointer-events:none;}body.nadal-native-app #winterSettings .app-settings-coffee-art{display:none;}}
