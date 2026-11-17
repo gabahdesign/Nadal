@@ -44,7 +44,7 @@
         const update = (paragraph, before, after) => { if (paragraph) paragraph.textContent = paragraph.textContent.replace(before, after); };
         ca.forEach(p => update(p, 'Per apuntar-s’hi farem enquestes al grup en lloc de llistes.', 'Per apuntar-s’hi farem principalment enquestes o esdeveniments i, puntualment, una llista de WhatsApp.'));
         es.forEach(p => update(p, 'Para apuntarse haremos encuestas en el grupo en vez de listas.', 'Para apuntarse haremos principalmente encuestas o eventos y, puntualmente, una lista de WhatsApp.'));
-        const addRule = (lang, text) => { const p = document.createElement('p'); p.className = 'home-text'; p.dataset.projectLang = lang; p.textContent = text; content.appendChild(p); };
+        const addRule = (lang, text) => { const p = document.createElement('p'); p.className = 'home-text'; p.dataset.projectLang = lang; p.hidden = lang !== (new URLSearchParams(location.search).get('lang') === 'es' ? 'es' : 'ca'); p.textContent = text; content.appendChild(p); };
         addRule('ca', 'Si vas a una activitat un altre dia o el mateix dia amb un altre grup i no tens pensat venir amb nosaltres, estalvia’t de dir-ho al grup. Fer-ho comportarà la teva expulsió de la comunitat, no només del grup.');
         addRule('es', 'Si vas a una actividad otro día o el mismo día con otro grupo y no tienes pensado venir con nosotros, evita decirlo en el grupo. Hacerlo supondrá tu expulsión de la comunidad, no solo del grupo.');
       }
