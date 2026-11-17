@@ -4,6 +4,7 @@
   function init(){
     const launch=document.querySelector('.app-wheel-launch');
     if (!launch || !window.NadalActivities || !window.NadalWheelDates) return false;
+    const backdrop=make('div','app-wheel-v2-page-background');backdrop.hidden=true;backdrop.setAttribute('aria-hidden','true');document.body.appendChild(backdrop);
     const dialog=make('dialog','app-wheel-v2');dialog.setAttribute('aria-labelledby','wheel-v2-title');
     const head=make('div','app-wheel-v2-head');const title=make('h2','','Tria un pla');title.id='wheel-v2-title';const close=make('button','app-wheel-v2-close','×');close.type='button';close.setAttribute('aria-label','Tanca');head.append(title,close);
     const settings=make('details','app-wheel-v2-settings');
@@ -40,12 +41,12 @@
         const li=make('li','','');const bullet=make('span','',String(i+1));bullet.style.background=colorFor(item);li.append(bullet,document.createTextNode(item.titol));legend.appendChild(li);
       });
     }
-    launch.onclick=()=>{spin.textContent='Girar';paint();dialog.show();};
+    launch.onclick=()=>{spin.textContent='Girar';paint();backdrop.hidden=false;dialog.show();};
     document.querySelector('.app-bottom-nav')?.addEventListener('click',event=>{if(dialog.open && event.target.closest('button'))dialog.close();});
     refreshChoices.onclick=()=>{if(spinning)return;spin.textContent='Girar';paint();};
     settingsToggle.addEventListener('click',event=>{if(spinning)event.preventDefault();});
     close.onclick=()=>dialog.close();
-    dialog.addEventListener('close',()=>{clearTimeout(timer);spinning=false;spin.disabled=false;refreshChoices.disabled=false;settingsToggle.removeAttribute('aria-disabled');disc.style.transition='none';});
+    dialog.addEventListener('close',()=>{backdrop.hidden=true;clearTimeout(timer);spinning=false;spin.disabled=false;refreshChoices.disabled=false;settingsToggle.removeAttribute('aria-disabled');disc.style.transition='none';});
     spin.onclick=()=>{
       if(spinning)return;
       // Recheck against the clock each time, including after midnight.
