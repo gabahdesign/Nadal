@@ -63,3 +63,25 @@
 }
 @media(max-width:760px){body.nadal-redesign.nadal-native-app #nadalProposalForm .app-proposal-date-label{display:block;margin:0 0 7px 2px;color:#fff;font:700 13px/1.4 system-ui,sans-serif;}body.nadal-redesign.nadal-native-app #nadalProposalForm .app-proposal-date-note{margin:0 2px 6px;color:#d4d4d4;font:13px/1.5 system-ui,sans-serif;}body.nadal-redesign.nadal-native-app #nadalProposalForm input:is([type=date],[type=time]){color-scheme:dark;}}
 @media(max-width:760px){body.nadal-native-app #winterSettings .winter-mobile-settings-links a[data-winter-mobile-link="coffee"]::after{content:'';position:absolute;right:-22px;bottom:-25px;width:205px;height:160px;background:url('./cafe-web.png') center/contain no-repeat;transform:rotate(-12deg);pointer-events:none;}body.nadal-native-app #winterSettings .app-settings-coffee-art{display:none;}}
+@media(max-width:760px){
+ body.nadal-native-app[data-app-screen="home"] footer.footer{margin:12px!important;padding:0 0 20px!important;}
+ body.nadal-native-app[data-app-screen="home"] footer.footer .footer-shell{width:100%!important;min-height:180px!important;padding:24px!important;}
+ body.nadal-native-app footer.footer .winter-mobile-social{max-width:60%;}
+ body.nadal-native-app footer.footer .app-instagram-art{width:120px;height:120px;right:14px;bottom:14px;transform:rotate(-18deg);}
+ body.nadal-native-app .app-whatsapp-card{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:8px;min-height:180px;margin:12px;padding:24px 135px 24px 24px;border-radius:25px;background:radial-gradient(ellipse at 90% 0%,#226345,#153b29 55%,#10231b)!important;color:#fff!important;text-decoration:none;}
+ body.nadal-native-app .app-whatsapp-card strong{font:800 21px/1.15 system-ui,sans-serif;}
+ body.nadal-native-app .app-whatsapp-card span{font:14px/1.4 system-ui,sans-serif;color:#e8f8ed;}
+ body.nadal-native-app .app-whatsapp-card svg{position:absolute;right:24px;bottom:30px;width:100px;height:100px;transform:rotate(-12deg);}
+ body.nadal-redesign.nadal-native-app #winterSettings .winter-mobile-settings-links .app-whatsapp-card{margin:0;display:flex;flex-direction:column;justify-content:center;min-height:150px;padding:24px 130px 24px 22px!important;background:radial-gradient(ellipse at 90% 0%,#226345,#153b29 55%,#10231b)!important;}
+ body.nadal-native-app #winterSettings .app-whatsapp-card svg{width:95px;height:95px;right:18px;bottom:24px;}
+ body.nadal-native-app .app-proposal-optional{border-radius:18px;background:#252525;color:#fff;}
+ body.nadal-native-app .app-proposal-optional summary{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:14px 16px;cursor:pointer;list-style:none;font:700 15px system-ui,sans-serif;}
+ body.nadal-native-app .app-proposal-optional summary::-webkit-details-marker{display:none;}
+ body.nadal-native-app .app-proposal-optional summary::after{content:'+';color:#ffc83d;font-size:24px;}
+ body.nadal-native-app .app-proposal-optional[open] summary::after{content:'−';}
+ body.nadal-native-app .app-proposal-optional-fields{display:grid;gap:14px;padding:0 14px 16px;}
+ body.nadal-redesign.nadal-native-app #nadalProposalForm .app-proposal-optional input,body.nadal-redesign.nadal-native-app #nadalProposalForm .app-proposal-optional textarea{background:#393939!important;}
+}
+@media(max-width:760px){body.nadal-native-app footer.footer .app-instagram-art{right:26px;bottom:26px;}}
+@media(max-width:760px){body.nadal-native-app .app-proposal-optional summary::after{content:'';width:20px;height:20px;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffc83d' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E");}body.nadal-native-app .app-proposal-optional[open] summary::after{content:'';background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffc83d' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M5 12h14'/%3E%3C/svg%3E");}}
+@media(max-width:760px){body.nadal-native-app #winterSettings .app-settings-instagram-art{right:24px;bottom:18px;width:105px;height:105px;}}

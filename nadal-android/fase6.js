@@ -1,6 +1,7 @@
 (() => {
   if (!matchMedia('(max-width: 760px)').matches) return;
   const months = [[2026,10,'Nov 2026'],[2026,11,'Des 2026'],[2027,0,'Gen 2027'],[2027,1,'Feb 2027']];
+  const spanish = new URLSearchParams(location.search).get('lang') === 'es';
   let month=0, day=null, status='pending';
   const root=document.createElement('main'); root.id='app-calendar-v2'; root.setAttribute('aria-label','Calendari');
   const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;};
@@ -14,10 +15,10 @@
     root.replaceChildren();const header=el('header','app-calendar-v2-header');
     header.append(el('p','app-calendar-kicker','CALENDARI MENSUAL I TOTES LES UBICACIONS'),el('h1','','Calendari mensual i totes les ubicacions'),el('p','app-calendar-copy','El mapa mostra alhora totes les ubicacions concretes de fires, rutes, festivals i plans. Els punts s’agrupen quan queden a prop; toca un grup per ampliar i obrir una fitxa per veure’n la ruta des de Barcelona en transport públic. Les ubicacions no confirmen que Move hi vagi.'));root.appendChild(header);
     const selector=el('nav','app-calendar-v2-months');selector.setAttribute('aria-label','Selecciona un mes');months.forEach((m,i)=>selector.appendChild(pill(m[2],month===i,()=>{month=i;day=null;render();})));root.appendChild(selector);
-    const panel=el('section','app-calendar-v2-panel');const dateTitle=new Intl.DateTimeFormat('ca-ES',{month:'long',year:'numeric'}).format(new Date(months[month][0],months[month][1],1));
+    const panel=el('section','app-calendar-v2-panel');const dateTitle=new Intl.DateTimeFormat(spanish?'es-ES':'ca-ES',{month:'long',year:'numeric'}).format(new Date(months[month][0],months[month][1],1));
     panel.appendChild(el('h2','',dateTitle));
     const calendarScroll=el('div','app-calendar-v2-scroll');const grid=el('div','app-calendar-v2-grid');
-    ['Dl','Dt','Dc','Dj','Dv','Ds','Dg'].forEach(w=>{const label=el('span','app-calendar-v2-weekday',w);label.setAttribute('aria-hidden','true');grid.appendChild(label);});
+    (spanish?['Lu','Ma','Mi','Ju','Vi','Sá','Do']:['Dl','Dt','Dc','Dj','Dv','Ds','Dg']).forEach(w=>{const label=el('span','app-calendar-v2-weekday',w);label.setAttribute('aria-hidden','true');grid.appendChild(label);});
     const [year,number]=months[month],offset=(new Date(year,number,1).getDay()+6)%7,count=new Date(year,number+1,0).getDate();
     for(let i=0;i<offset;i++){const spacer=el('span','app-calendar-v2-blank');spacer.setAttribute('aria-hidden','true');grid.appendChild(spacer);}
     for(let d=1;d<=count;d++){

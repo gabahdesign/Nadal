@@ -28,6 +28,18 @@
       note.textContent = spanish ? 'Si no indicas fecha u hora, las elegiremos nosotros. Aunque las indiques, no podemos garantizar que el plan se haga en el horario propuesto.' : 'Si no indiques data o hora, les triarem nosaltres. Encara que les indiquis, no podem assegurar que el pla es faci en l’horari proposat.';
       time.closest('.proposal-field').after(note);
     }
+    const description = form.elements.description?.closest('.proposal-field');
+    const location = form.elements.location?.closest('.proposal-field');
+    if (description && location) description.before(location);
+    const details = document.createElement('details'); details.className = 'app-proposal-optional';
+    const summary = document.createElement('summary'); summary.textContent = spanish ? 'Datos opcionales' : 'Dades opcionals'; details.appendChild(summary);
+    const optionalFields = document.createElement('div'); optionalFields.className = 'app-proposal-optional-fields'; details.appendChild(optionalFields);
+    ['date_proposed','schedule','price','info_url','observations'].forEach(name => {
+      const input = form.elements[name]; if (!input) return; input.required = false;
+      const field = input.closest('.proposal-field'); if (field) optionalFields.appendChild(field);
+      if (name === 'schedule') { const note = form.querySelector('#proposal-date-note'); if (note) optionalFields.appendChild(note); }
+    });
+    form.querySelector('[type="submit"]').before(details);
     const status = form.querySelector('#nadalProposalStatus');
     const submit = form.querySelector('[type="submit"]');
     form.addEventListener('submit', async event => {

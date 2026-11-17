@@ -21,10 +21,20 @@
     const social=document.querySelector('.winter-mobile-social');
     if(social){const link=social.querySelector('a');if(link && link.textContent.includes('↗'))link.textContent=link.textContent.replace('↗','').trim();
       const shell=social.closest('.footer-shell');if(shell && !shell.querySelector('.app-instagram-art')){const art=document.createElementNS('http://www.w3.org/2000/svg','svg');art.setAttribute('viewBox','0 0 24 24');art.setAttribute('class','app-instagram-art');art.setAttribute('aria-hidden','true');art.innerHTML='<defs><linearGradient id="insta-body" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f3dbbd"/><stop offset="1" stop-color="#bb8a68"/></linearGradient><radialGradient id="insta-lens"><stop stop-color="#559dba"/><stop offset=".5" stop-color="#1a394d"/><stop offset="1" stop-color="#101522"/></radialGradient></defs><rect x="2" y="2" width="20" height="20" rx="4.4" fill="url(#insta-body)"/><path d="M2 7V6.4A4.4 4.4 0 0 1 6.4 2h11.2A4.4 4.4 0 0 1 22 6.4V9H2Z" fill="#745044"/><path d="M5 2h1v7H5z" fill="#e45c4b"/><path d="M6 2h1v7H6z" fill="#f8c84a"/><path d="M7 2h1v7H7z" fill="#83b871"/><path d="M8 2h1v7H8z" fill="#5ea3c9"/><rect x="16.7" y="4.3" width="3.1" height="2.6" rx=".5" fill="#e8d5b9"/><circle cx="12" cy="13" r="6.1" fill="#d1c2aa"/><circle cx="12" cy="13" r="4.9" fill="#514d4c"/><circle cx="12" cy="13" r="3.9" fill="url(#insta-lens)"/><circle cx="10.8" cy="11.8" r="1" fill="#b3d5e0" opacity=".8"/>';shell.appendChild(art);}}
+    const isSpanish = new URLSearchParams(location.search).get('lang') === 'es';
+    const whatsappUrl = 'https://chat.whatsapp.com/BX9Ihxf9jtoLlqsb4deozp?s=cl&p=a&iam=2';
+    function whatsappCard() {
+      const link=document.createElement('a');link.className='app-whatsapp-card';link.href=whatsappUrl;link.target='_blank';link.rel='noopener noreferrer';
+      const label=document.createElement('strong');label.textContent=isSpanish?'Únete al grupo de WhatsApp':'Uneix-te al grup de WhatsApp';
+      const hint=document.createElement('span');hint.textContent=isSpanish?'Compartamos planes juntos':'Compartim plans plegats';
+      const icon=document.createElementNS('http://www.w3.org/2000/svg','svg');icon.setAttribute('viewBox','0 0 48 48');icon.setAttribute('aria-hidden','true');icon.innerHTML='<circle cx="24" cy="24" r="23" fill="#25d366"/><path d="M14 36l2-6a13 13 0 1 1 5 4z" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/><path d="M19 17c-1 1-1 3 1 6s5 6 8 6c1 0 3-2 3-3l-3-2-2 1c-2-1-4-3-5-5l1-2-2-2z" fill="#fff"/>';
+      link.append(label,hint,icon);return link;
+    }
+    const home=document.querySelector('#home');if(home && home.dataset.appHomeReady && !home.querySelector('.app-whatsapp-card'))home.appendChild(whatsappCard());
     const settings=document.querySelector('#winterSettings .winter-mobile-settings-links');
     if(settings && !settings.dataset.cardsReady){
       const instagram=settings.querySelector('a[href*="instagram.com"]'), coffee=settings.querySelector('[data-winter-mobile-link="coffee"]'), website=settings.querySelector('[data-winter-mobile-link="website"]');
-      if(instagram && coffee && website){settings.dataset.cardsReady='true';settings.append(instagram,coffee,website);
+      if(instagram && coffee && website){settings.dataset.cardsReady='true';settings.append(instagram,coffee,website);settings.appendChild(whatsappCard());
         const art=document.querySelector('.footer-shell .app-instagram-art');if(art){const copy=art.cloneNode(true);copy.classList.add('app-settings-instagram-art');instagram.appendChild(copy);}
         const cup=document.createElementNS('http://www.w3.org/2000/svg','svg');cup.setAttribute('viewBox','0 0 64 64');cup.setAttribute('class','app-settings-coffee-art');cup.setAttribute('aria-hidden','true');cup.innerHTML='<path d="M14 22h31v17a13 13 0 0 1-13 13h-5a13 13 0 0 1-13-13z" fill="#e7c497"/><path d="M45 26h5a8 8 0 0 1 0 16h-6" fill="none" stroke="#e7c497" stroke-width="5"/><path d="M10 56h42M24 15c-5-5 4-7 0-12M36 15c-5-5 4-7 0-12" fill="none" stroke="#ffc83d" stroke-width="3" stroke-linecap="round"/>';coffee.appendChild(cup);
       }
