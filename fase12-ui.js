@@ -3,12 +3,29 @@
   // The browser offer is separate from the installed app and never claims a missing APK exists.
   function offerDownload() {
     if (window.Capacitor?.isNativePlatform?.()) return;
-    try { if(localStorage.getItem('nadal_apk_offer_seen')==='1')return; } catch (_) {}
+    const spanish = new URLSearchParams(location.search).get('lang') === 'es';
     const overlay=document.createElement('section');overlay.className='app-download-offer';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-labelledby','app-download-title');
-    overlay.innerHTML='<div class="app-download-content"><span class="app-download-kicker">MOVE × LOBITOS</span><h1 id="app-download-title">Nadal, també al teu mòbil</h1><p>Descarrega l’app per tenir els plans d’hivern sempre a mà.</p><a class="app-download-button" href="./nadal.apk" download="nadal.apk" hidden>Descarrega l’APK</a><p class="app-download-status" role="status">Comprovant la disponibilitat de l’APK…</p><button class="app-download-continue" type="button">Continua a la web</button></div>';
-    const close=()=>{try{localStorage.setItem('nadal_apk_offer_seen','1');}catch(_){}overlay.remove();};
-    overlay.querySelector('.app-download-continue').addEventListener('click',close);overlay.querySelector('.app-download-button').addEventListener('click',close);document.body.appendChild(overlay);overlay.querySelector('.app-download-continue').focus();
-    fetch('./nadal.apk',{method:'HEAD',cache:'no-store'}).then(response=>{const type=response.headers.get('content-type')||'';if(!response.ok||/text\/html/i.test(type))throw Error('APK unavailable');overlay.querySelector('.app-download-button').hidden=false;overlay.querySelector('.app-download-status').textContent='';}).catch(()=>{overlay.querySelector('.app-download-status').textContent='L’APK encara no està disponible. Pots continuar a la web.';});
+    overlay.innerHTML='<div class="app-download-content"><span class="app-download-kicker">MOVE × LOBITOS</span><h1 id="app-download-title"></h1><p class="app-download-description"></p><button class="app-download-button" type="button"></button><p class="app-download-status" role="status"></p><button class="app-download-continue" type="button"></button></div>';
+    const title=overlay.querySelector('h1'),description=overlay.querySelector('.app-download-description'),button=overlay.querySelector('.app-download-button'),status=overlay.querySelector('.app-download-status'),skip=overlay.querySelector('.app-download-continue');
+    title.textContent=spanish?'Navidad, también en tu móvil':'Nadal, també al teu mòbil';
+    description.textContent=spanish?'Descarga la aplicación de prueba para Android.':'Descarrega l’aplicació de prova per a Android.';
+    button.textContent=spanish?'Descargar el APK':'Descarrega l’APK';skip.textContent=spanish?'Continuar en la web':'Continua a la web';
+    skip.addEventListener('click',()=>overlay.remove());
+    button.addEventListener('click',async()=>{
+      button.disabled=true;skip.disabled=true;const parts=[];
+      try {
+        for(let i=1;i<=4;i++){
+          status.textContent=spanish?`Preparando la descarga (${i}/4)…`:`Preparant la descàrrega (${i}/4)…`;
+          const response=await fetch(`./nadal.apk.part${i}`,{cache:'force-cache'});
+          if(!response.ok)throw new Error('download');parts.push(await response.arrayBuffer());
+        }
+        const objectUrl=URL.createObjectURL(new Blob(parts,{type:'application/vnd.android.package-archive'}));
+        const link=document.createElement('a');link.href=objectUrl;link.download='nadal.apk';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(objectUrl),60000);
+        status.textContent=spanish?'Descarga iniciada.':'Descàrrega iniciada.';
+      } catch(_) {status.textContent=spanish?'No se ha podido descargar el APK. Comprueba la conexión e inténtalo de nuevo.':'No s’ha pogut descarregar l’APK. Comprova la connexió i torna-ho a provar.';}
+      finally {button.disabled=false;skip.disabled=false;}
+    });
+    document.body.appendChild(overlay);skip.focus();
   }
   offerDownload();
   const paths = {'→':'M5 12h14 M13 6l6 6-6 6','←':'M19 12H5 M11 6l-6 6 6 6','↗':'M7 17 17 7 M7 7h10v10','+':'M12 5v14 M5 12h14','＋':'M12 5v14 M5 12h14'};

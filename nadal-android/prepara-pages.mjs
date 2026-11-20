@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile, cp } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, cp, access } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root=dirname(fileURLToPath(import.meta.url));
@@ -21,5 +21,16 @@ await writeFile(resolve(output,'nadal-mobile.html'),mobile);
 for(const name of ['fase1.css','fase1.js','fase2.css','fase3.css','fase3.js','fase4.css','fase4.js','fase5.css','fase5.js','fase6.css','fase6.js','fase7.css','fase7.js','fase8.css','fase8.js','fase9.css','fase9.js','fase9-data.js','fase10.css','fase10.js','fase11.css','fase11.js','fase12-ui.css','fase12-ui.js','fase13-i18n.js','activitats.json','proposal-config.json','nadal-app.css','move-logo.png','images','cafe-web.png']) await cp(resolve(root,'www',name),resolve(output,name),{recursive:true});
 await cp(resolve(root,'www/nadal-app.js'),resolve(output,'nadal-mobile-runtime.js'));
 await cp(resolve(root,'android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png'),resolve(output,'nadal-icon.png'));
+// Keep the signed APK outside the Android web bundle. GitHub Pages serves it
+// in bounded parts; the mobile download screen reassembles the original bytes.
+const apkPath=resolve(root,'nadal.apk');
+try {
+  await access(apkPath);
+  const apk=await readFile(apkPath);
+  for(let i=0;i<4;i++)await writeFile(resolve(output,`nadal.apk.part${i+1}`),apk.subarray(i*27000000,(i+1)*27000000));
+} catch(error) {
+  if(error.code!=='ENOENT')throw error;
+  for(let i=1;i<=4;i++){try{await cp(resolve(root,'..',`nadal.apk.part${i}`),resolve(output,`nadal.apk.part${i}`));}catch(copyError){if(copyError.code!=='ENOENT')throw copyError;}}
+}
 for(const name of ['leaflet/leaflet.js','leaflet/leaflet.css','leaflet/images','markercluster/leaflet.markercluster.js','markercluster/MarkerCluster.css']) {const dest=resolve(output,'vendor',name);await mkdir(dirname(dest),{recursive:true});await cp(resolve(root,'www/vendor',name),dest,{recursive:true});}
 console.log('Previsualització de GitHub Pages preparada a pages-build.');
